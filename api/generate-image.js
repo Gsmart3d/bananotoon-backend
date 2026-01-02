@@ -25,10 +25,17 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { userId, style, customPrompt, imageUrl } = req.body;
+  const { userId, style, customPrompt, imageUrl, mode } = req.body;
 
-  if (!userId || !style || !imageUrl) {
-    return res.status(400).json({ error: 'Missing userId, style or imageUrl' });
+  if (!userId || !style) {
+    return res.status(400).json({ error: 'Missing userId or style' });
+  }
+
+  // Mode can be 'generate' (text-to-image) or 'edit' (image-to-image)
+  const generationMode = mode || (imageUrl ? 'edit' : 'generate');
+
+  if (generationMode === 'edit' && !imageUrl) {
+    return res.status(400).json({ error: 'imageUrl required for edit mode' });
   }
 
   try {
@@ -59,11 +66,20 @@ module.exports = async (req, res) => {
 
     // Construire le prompt
     const stylePrompt = STYLE_PROMPTS[style] || STYLE_PROMPTS.pixar;
-    const basePrompt = customPrompt || 'transform this person';
-    const fullPrompt = `${basePrompt}, ${stylePrompt}`;
 
-    // Toujours utiliser nano-banana-edit (édition d'image)
-    const model = 'google/nano-banana-edit';
+    let fullPrompt;
+    if (generationMode === 'generate') {
+      // Text-to-image: génération pure
+      const userPrompt = customPrompt || 'a portrait of a person';
+      fullPrompt = `${userPrompt}, ${stylePrompt}`;
+    } else {
+      // Image-to-image: édition
+      const userDirective = customPrompt ? ` ${customPrompt}` : '';
+      fullPrompt = `transform this person${userDirective}, ${stylePrompt}`;
+    }
+
+    // Choisir le modèle selon le mode
+    const model = generationMode === 'generate' ? 'google/nano-banana' : 'google/nano-banana-edit';
 
     // Callback URL Vercel - utilise le host de la requête pour être dynamique
     const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
@@ -79,9 +95,13 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         model: model,
         callBackUrl: callbackUrl,
-        input: {
+        input: generationMode === 'edit' ? {
           prompt: fullPrompt,
           image_urls: [imageUrl],
+          output_format: 'png',
+          image_size: '1:1'
+        } : {
+          prompt: fullPrompt,
           output_format: 'png',
           image_size: '1:1'
         }
