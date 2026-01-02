@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "env": {
+    "FIREBASE_PROJECT_ID": "bananotoon",
+    "FIREBASE_PRIVATE_KEY": "@firebase-private-key",
+    "FIREBASE_CLIENT_EMAIL": "@firebase-client-email"
+  },
+  "crons": [
+    {
+      "path": "/api/reset-weekly-quotas",
+      "schedule": "0 0 * * 1"
+    },
+    {
+      "path": "/api/cleanup-old-transformations",
+      "schedule": "0 0 1 * *"
+    }
+  ]
+}
