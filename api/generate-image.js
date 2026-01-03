@@ -7,6 +7,7 @@ const { getFirestore, admin } = require('./_firebase');
 
 // Master prompts pour transformer la référence dans le style choisi
 const STYLE_PROMPTS = {
+  neutral: 'high quality professional photography, preserve all facial features and details, maintain original composition and style, realistic rendering, natural lighting',
   pixar: 'turn this character into Pixar 3D animation style, preserve facial features and identity, smooth CGI rendering, expressive eyes, vibrant colors, Disney-Pixar quality, professional character design, maintain pose and composition',
   manga: 'transform this character into Japanese manga style, preserve facial features and expression, black and white ink art, dynamic screentone shading, bold linework, expressive manga eyes, detailed hair strands, professional manga artist quality',
   anime: 'convert this character into anime style, keep facial structure and identity, vibrant cel-shaded colors, detailed anime shading, beautiful character design, sharp linework, expressive anime eyes, studio-quality animation style',
@@ -25,14 +26,15 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { userId, style, customPrompt, imageUrl, imageUrls, mode, image_size } = req.body;
+  const { userId, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro } = req.body;
 
   if (!userId || !style) {
     return res.status(400).json({ error: 'Missing userId or style' });
   }
 
-  // Mode can be 'generate' (text-to-image) or 'edit' (image-to-image)
+  // Mode can be 'generate' (text-to-image), 'edit' (image-to-image), or 'pro' (premium generation)
   const generationMode = mode || (imageUrl || imageUrls ? 'edit' : 'generate');
+  const usePro = isPro === true || mode === 'pro';
 
   if (generationMode === 'edit' && !imageUrl && !imageUrls) {
     return res.status(400).json({ error: 'imageUrl or imageUrls required for edit mode' });
@@ -83,7 +85,12 @@ module.exports = async (req, res) => {
     }
 
     // Choisir le modèle selon le mode
-    const model = generationMode === 'generate' ? 'google/nano-banana' : 'google/nano-banana-edit';
+    let model;
+    if (usePro) {
+      model = 'nano-banana-pro'; // Mode PRO
+    } else {
+      model = generationMode === 'generate' ? 'google/nano-banana' : 'google/nano-banana-edit';
+    }
 
     // Callback URL Vercel - utilise le host de la requête pour être dynamique
     const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
@@ -97,6 +104,8 @@ module.exports = async (req, res) => {
     console.log('userId:', userId);
     console.log('style:', style);
     console.log('mode:', generationMode);
+    console.log('isPro:', usePro);
+    console.log('model:', model);
     console.log('image_size:', imageSize);
     console.log('imageUrlsArray:', imageUrlsArray);
     console.log('customPrompt:', customPrompt);
@@ -113,16 +122,21 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         model: model,
         callBackUrl: callbackUrl,
-        input: generationMode === 'edit' ? {
+        input: usePro ? {
+          prompt: fullPrompt,
+          aspect_ratio: imageSize, // Pro model uses aspect_ratio
+          resolution: '1K',
+          output_format: 'png'
+        } : (generationMode === 'edit' ? {
           prompt: fullPrompt,
           image_urls: imageUrlsArray,
           output_format: 'png',
-          image_size: imageSize  // ✅ Utilise le paramètre envoyé par l'app
+          image_size: imageSize
         } : {
           prompt: fullPrompt,
           output_format: 'png',
-          image_size: imageSize  // ✅ Utilise le paramètre envoyé par l'app
-        }
+          image_size: imageSize
+        })
       })
     });
 
