@@ -80,10 +80,10 @@ module.exports = async (req, res) => {
       console.log('aspect_ratio: 9:16 (fixed)');
 
       // Appeler KIE.AI wan/2-2-a14b-image-to-video-turbo
+      // Duration is automatic for TURBO model (no need to specify)
       const videoInput = {
         image_url: videoImageUrl,
         prompt: videoPrompt,
-        duration: parseInt(videoDuration),
         resolution: videoResolution,
         aspect_ratio: "9:16", // Always 9:16
         enable_prompt_expansion: false,
