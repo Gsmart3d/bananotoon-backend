@@ -26,12 +26,125 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { userId, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro } = req.body;
+  const { userId, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro, duration, resolution } = req.body;
 
   if (!userId || !style) {
     return res.status(400).json({ error: 'Missing userId or style' });
   }
 
+  // VIDEO GENERATION MODE (style === "video")
+  if (style === 'video') {
+    if (!imageUrl && !imageUrls) {
+      return res.status(400).json({ error: 'imageUrl or imageUrls required for video generation' });
+    }
+
+    const videoImageUrl = imageUrl || (imageUrls && imageUrls[0]);
+    const videoDuration = duration || "5";
+    const videoResolution = resolution || "1080p";
+    const videoPrompt = customPrompt || 'A cinematic video transformation of this image with smooth camera movement';
+
+    try {
+      const db = getFirestore();
+      const userRef = db.collection('users').doc(userId);
+      const userDoc = await userRef.get();
+
+      if (!userDoc.exists) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+
+      const userData = userDoc.data();
+
+      // Vérifier les quotas
+      if (userData.subscriptionType === 'FREE' && userData.quotaRemaining <= 0) {
+        return res.status(403).json({
+          error: 'Quota exceeded',
+          message: 'You have reached your weekly limit.'
+        });
+      }
+
+      // Callback URL Vercel
+      const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
+      const callbackUrl = `https://${host}/api/kie-callback`;
+
+      console.log('=== VIDEO GENERATION ===');
+      console.log('userId:', userId);
+      console.log('imageUrl:', videoImageUrl);
+      console.log('prompt:', videoPrompt);
+      console.log('duration:', videoDuration);
+      console.log('resolution:', videoResolution);
+      console.log('model: wan/2-6-image-to-video');
+
+      // Appeler KIE.AI wan/2-6-image-to-video
+      const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.KIE_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "wan/2-6-image-to-video",
+          callBackUrl: callbackUrl,
+          input: {
+            prompt: videoPrompt,
+            image_urls: [videoImageUrl],
+            duration: videoDuration,
+            resolution: videoResolution,
+            multi_shots: false
+          }
+        })
+      });
+
+      const kieResult = await kieResponse.json();
+
+      if (kieResult.code !== 200) {
+        console.error('KIE.AI video error:', kieResult);
+        return res.status(500).json({
+          error: 'KIE.AI API error',
+          details: kieResult.msg
+        });
+      }
+
+      const taskId = kieResult.data.taskId;
+
+      // Décrémenter le quota
+      await userRef.update({
+        quotaRemaining: admin.firestore.FieldValue.increment(-1)
+      });
+
+      // Sauvegarder la transformation en pending
+      const transformationRef = db.collection('transformations').doc(taskId);
+      await transformationRef.set({
+        userId: userId,
+        taskId: taskId,
+        type: 'video',
+        prompt: videoPrompt,
+        originalImageUrl: videoImageUrl,
+        duration: videoDuration,
+        resolution: videoResolution,
+        status: 'pending',
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        subscriptionTypeAtCreation: userData.subscriptionType
+      });
+
+      console.log(`✅ Video generation started - taskId: ${taskId}`);
+
+      return res.status(200).json({
+        success: true,
+        taskId: taskId,
+        message: 'Video generation started! This may take 30-60 seconds.',
+        estimatedTime: '30-60 seconds'
+      });
+
+    } catch (error) {
+      console.error('❌ Video generation error:', error);
+      return res.status(500).json({
+        success: false,
+        error: error.message
+      });
+    }
+  }
+
+  // IMAGE GENERATION MODE (normal flow)
   // Mode can be 'generate' (text-to-image), 'edit' (image-to-image), or 'pro' (premium generation)
   const generationMode = mode || (imageUrl || imageUrls ? 'edit' : 'generate');
   const usePro = isPro === true || mode === 'pro';
