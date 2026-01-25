@@ -54,11 +54,14 @@ module.exports = async (req, res) => {
 
       const userData = userDoc.data();
 
-      // Vérifier les quotas
-      if (userData.subscriptionType === 'FREE' && userData.quotaRemaining <= 0) {
+      // Vérifier les crédits (nouveau système)
+      const isPremium = userData.subscriptionTier === 'premium';
+      const hasCredits = userData.totalCredits > 0;
+
+      if (!isPremium && !hasCredits) {
         return res.status(403).json({
-          error: 'Quota exceeded',
-          message: 'You have reached your weekly limit.'
+          error: 'No credits',
+          message: 'You have no credits. Subscribe or buy a credit pack!'
         });
       }
 
@@ -116,10 +119,19 @@ module.exports = async (req, res) => {
 
       const taskId = kieResult.data.taskId;
 
-      // Décrémenter le quota
-      await userRef.update({
-        quotaRemaining: admin.firestore.FieldValue.increment(-1)
-      });
+      // Décrémenter les crédits (sauf Premium qui a unlimited)
+      if (!isPremium) {
+        await userRef.update({
+          totalCredits: admin.firestore.FieldValue.increment(-1),
+          lifetimeTransformations: admin.firestore.FieldValue.increment(1),
+          transformationsCount: admin.firestore.FieldValue.increment(1)
+        });
+      } else {
+        await userRef.update({
+          lifetimeTransformations: admin.firestore.FieldValue.increment(1),
+          transformationsCount: admin.firestore.FieldValue.increment(1)
+        });
+      }
 
       // Sauvegarder la transformation en pending
       const transformationRef = db.collection('transformations').doc(taskId);
@@ -133,7 +145,7 @@ module.exports = async (req, res) => {
         resolution: videoResolution,
         status: 'pending',
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        subscriptionTypeAtCreation: userData.subscriptionType
+        subscriptionTier: userData.subscriptionTier
       });
 
       console.log(`✅ Video generation started - taskId: ${taskId}`);
@@ -177,18 +189,14 @@ module.exports = async (req, res) => {
 
     const userData = userDoc.data();
 
-    // Vérifier les quotas
-    if (userData.subscriptionType === 'FREE' && userData.quotaRemaining <= 0) {
-      return res.status(403).json({
-        error: 'Quota exceeded',
-        message: 'You have reached your weekly limit. Upgrade or watch an ad!'
-      });
-    }
+    // Vérifier les crédits (nouveau système)
+    const isPremium = userData.subscriptionTier === 'premium';
+    const hasCredits = userData.totalCredits > 0;
 
-    if (userData.subscriptionType === 'STANDARD' && userData.quotaRemaining <= 0) {
+    if (!isPremium && !hasCredits) {
       return res.status(403).json({
-        error: 'Quota exceeded',
-        message: 'You have reached your weekly limit of 50 transformations.'
+        error: 'No credits',
+        message: 'You have no credits. Subscribe or buy a credit pack!'
       });
     }
 
@@ -274,10 +282,19 @@ module.exports = async (req, res) => {
 
     const taskId = kieResult.data.taskId;
 
-    // Décrémenter le quota
-    await userRef.update({
-      quotaRemaining: admin.firestore.FieldValue.increment(-1)
-    });
+    // Décrémenter les crédits (sauf Premium qui a unlimited)
+    if (!isPremium) {
+      await userRef.update({
+        totalCredits: admin.firestore.FieldValue.increment(-1),
+        lifetimeTransformations: admin.firestore.FieldValue.increment(1),
+        transformationsCount: admin.firestore.FieldValue.increment(1)
+      });
+    } else {
+      await userRef.update({
+        lifetimeTransformations: admin.firestore.FieldValue.increment(1),
+        transformationsCount: admin.firestore.FieldValue.increment(1)
+      });
+    }
 
     // Sauvegarder la transformation en pending
     const transformationRef = db.collection('transformations').doc(taskId);
@@ -289,7 +306,7 @@ module.exports = async (req, res) => {
       originalImageUrl: imageUrl || null,
       status: 'pending',
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      subscriptionTypeAtCreation: userData.subscriptionType
+      subscriptionTier: userData.subscriptionTier
     });
 
     return res.status(200).json({

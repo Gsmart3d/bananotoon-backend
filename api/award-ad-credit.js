@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
     const db = getFirestore();
     
-    // Transaction pour incrémenter le quota
+    // Transaction pour ajouter 1 crédit
     await db.runTransaction(async (transaction) => {
       const userRef = db.collection('users').doc(userId);
       const userDoc = await transaction.get(userRef);
@@ -36,9 +36,8 @@ module.exports = async (req, res) => {
         throw new Error('User not found');
       }
 
-      const currentQuota = userDoc.data().quotaRemaining || 0;
       transaction.update(userRef, {
-        quotaRemaining: currentQuota + 1,
+        totalCredits: admin.firestore.FieldValue.increment(1),
       });
     });
 

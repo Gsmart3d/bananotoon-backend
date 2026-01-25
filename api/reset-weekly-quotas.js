@@ -1,7 +1,12 @@
 /**
  * Vercel Cron Job
- * Reset les quotas chaque lundi à 00:00 UTC
+ * Reset les crédits des abonnés chaque semaine
  * Endpoint: /api/reset-weekly-quotas (appelé automatiquement)
+ *
+ * NOUVEAU SYSTÈME:
+ * - Free users: PAS de reset (2 crédits lifetime)
+ * - Standard: Reset à 50 crédits par semaine
+ * - Premium: Unlimited (pas de reset nécessaire)
  */
 const { getFirestore, admin } = require('./_firebase');
 
@@ -14,50 +19,46 @@ module.exports = async (req, res) => {
 
   try {
     const db = getFirestore();
-    const usersSnapshot = await db.collection('users').get();
-    
+    const now = admin.firestore.Timestamp.now();
+
+    // Chercher les users qui ont besoin de renouvellement
+    const usersSnapshot = await db.collection('users')
+      .where('creditsResetAt', '<=', now)
+      .get();
+
     const batch = db.batch();
-    let count = 0;
+    let standardCount = 0;
 
     usersSnapshot.docs.forEach((doc) => {
       const user = doc.data();
-      const newQuota = getQuotaForPlan(user.subscriptionType || 'free');
 
-      const nextWeek = new Date();
-      nextWeek.setDate(nextWeek.getDate() + 7);
+      // Seulement pour Standard (Premium a unlimited, Free n'a pas de reset)
+      if (user.subscriptionTier === 'standard') {
+        const nextReset = new Date();
+        nextReset.setDate(nextReset.getDate() + 7);
 
-      batch.update(doc.ref, {
-        quotaRemaining: newQuota,
-        quotaResetDate: admin.firestore.Timestamp.fromDate(nextWeek),
-      });
-      
-      count++;
+        batch.update(doc.ref, {
+          totalCredits: 50, // Reset à 50 crédits
+          creditsResetAt: admin.firestore.Timestamp.fromDate(nextReset),
+        });
+
+        standardCount++;
+      }
     });
 
     await batch.commit();
 
-    console.log(`Reset quotas for ${count} users`);
+    console.log(`Reset credits for ${standardCount} Standard users`);
     return res.status(200).json({
       success: true,
-      message: `Reset ${count} users`,
+      message: `Reset ${standardCount} Standard users`,
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Error resetting quotas:', error);
+    console.error('Error resetting credits:', error);
     return res.status(500).json({
       success: false,
       error: error.message,
     });
   }
 };
-
-function getQuotaForPlan(plan) {
-  switch (plan.toLowerCase()) {
-    case 'standard':
-      return 50;
-    case 'premium':
-      return 999999;
-    case 'free':
-    default:
-      return 5;
-  }
-}
