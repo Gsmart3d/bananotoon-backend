@@ -1,0 +1,2146 @@
+{
+  "version": "1.0.0",
+  "category": "video",
+  "total": 42,
+  "models": [
+    {
+      "id": "wan/2-2-a14b-image-to-video-turbo",
+      "name": "Wan 2 2 A14B Image To Video Turbo",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-2-a14b-image-to-video-turbo",
+      "description": "| Constraints |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-2-a14b-speech-to-video-turbo",
+      "name": "Wan 2 2 A14B Speech To Video Turbo",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-2-a14b-speech-to-video-turbo",
+      "description": "| Constraints |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_audio": [
+          "MP3",
+          "WAV"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "Input audio URL",
+            "accepted_formats": [
+              "MP3",
+              "WAV"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-2-a14b-text-to-video-turbo",
+      "name": "Wan 2 2 A14B Text To Video Turbo",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-2-a14b-text-to-video-turbo",
+      "description": "for video generation; max 5000 characters |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-2-animate-move",
+      "name": "Wan 2 2 Animate Move",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-2-animate-move",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-2-animate-replace",
+      "name": "Wan Animate Replace",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-2-animate-replace",
+      "description": "Wan Animate Replace video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-6-image-to-video",
+      "name": "Wan 2 6 Image To Video",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-6-image-to-video",
+      "description": "Wan 2 6 Image To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-6-text-to-video",
+      "name": "Wan 2 6 Text To Video",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-6-text-to-video",
+      "description": "Wan 2 6 Text To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "wan/2-6-video-to-video",
+      "name": "Wan 2 6 Video To Video",
+      "type": "video",
+      "provider": "Alibaba",
+      "endpoint": "wan/2-6-video-to-video",
+      "description": "(2-5,000 characters); supports Chinese/English |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_videos": [
+          "MP4",
+          "MOV",
+          "MKV"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "video_urls": {
+            "type": "array",
+            "description": "Input video URLs",
+            "accepted_formats": [
+              "MP4",
+              "MOV",
+              "MKV"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/seedance-1.5-pro",
+      "name": "Bytedance Seedance 1.5 Pro",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/seedance-1.5-pro",
+      "description": "| Options/Constraints |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/v1-lite-image-to-video",
+      "name": "Bytedance V1 Lite Image To Video",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/v1-lite-image-to-video",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/v1-lite-text-to-video",
+      "name": "Bytedance V1 Lite Text To Video",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/v1-lite-text-to-video",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/v1-pro-fast-image-to-video",
+      "name": "Bytedance V1 Pro Fast Image to Video",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/v1-pro-fast-image-to-video",
+      "description": "Bytedance V1 Pro Fast Image to Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/v1-pro-image-to-video",
+      "name": "Bytedance V1 Pro Image To Video",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/v1-pro-image-to-video",
+      "description": "for video generation (Max 10,000 characters) |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "bytedance/v1-pro-text-to-video",
+      "name": "Bytedance V1 Pro Text To Video",
+      "type": "video",
+      "provider": "ByteDance",
+      "endpoint": "bytedance/v1-pro-text-to-video",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "veo3",
+      "name": "Veo 3.1 Quality",
+      "type": "video",
+      "provider": "Google DeepMind",
+      "endpoint": "veo3",
+      "description": "High-quality AI video generation with Google Veo 3.1",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "veo3/extend",
+      "name": "Veo 3.1 Extend Video",
+      "type": "video",
+      "provider": "Google DeepMind",
+      "endpoint": "veo3/extend",
+      "description": "Extend existing videos with Google Veo 3.1 AI continuation",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_videos": [
+          "MP4",
+          "MOV"
+        ],
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "video_url": {
+            "type": "string",
+            "description": "URL of the video to extend"
+          }
+        },
+        "optional": {
+          "prompt": {
+            "type": "string",
+            "description": "Optional guidance for the extension"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 6,
+          "usd_per_second": 0.03
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "video_url": "https://example.com/video.mp4",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "veo3_fast",
+      "name": "Veo 3.1 Fast",
+      "type": "video",
+      "provider": "Google DeepMind",
+      "endpoint": "veo3_fast",
+      "description": "Fast, cost-efficient AI video generation with Google Veo 3.1",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 4,
+          "usd_per_second": 0.02
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A peaceful nature scene with flowing water",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/02-image-to-video-pro",
+      "name": "Hailuo Pro Image to Video",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/02-image-to-video-pro",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/02-image-to-video-standard",
+      "name": "Hailuo 02 Image To Video Standard",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/02-image-to-video-standard",
+      "description": "| Options/Default |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/02-text-to-video-pro",
+      "name": "Hailuo Pro Text to Video",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/02-text-to-video-pro",
+      "description": "Hailuo Pro Text to Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/02-text-to-video-standard",
+      "name": "Hailuo Standard Text to Video",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/02-text-to-video-standard",
+      "description": "Hailuo Standard Text to Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/2-3-image-to-video-pro",
+      "name": "Hailuo 2.3 Image to Video Pro",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/2-3-image-to-video-pro",
+      "description": "Hailuo 2.3 Image to Video Pro video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "hailuo/2-3-image-to-video-standard",
+      "name": "Hailuo 2 3 Image To Video Standard",
+      "type": "video",
+      "provider": "Hailuo AI",
+      "endpoint": "hailuo/2-3-image-to-video-standard",
+      "description": "Hailuo 2 3 Image To Video Standard video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling-2.6/image-to-video",
+      "name": "Kling 2.6 Image To Video",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling-2.6/image-to-video",
+      "description": "Kling 2.6 Image To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling-2.6/motion-control",
+      "name": "Kling 2.6 Motion Control",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling-2.6/motion-control",
+      "description": "Kling 2.6 Motion Control video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling-2.6/text-to-video",
+      "name": "Kling 2.6 Text To Video",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling-2.6/text-to-video",
+      "description": "Kling 2.6 Text To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling/v2-1-master-image-to-video",
+      "name": "Kling V2 1 Master Image To Video",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling/v2-1-master-image-to-video",
+      "description": "| Constraints |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling/v2-1-master-text-to-video",
+      "name": "Kling V2.1 Master Text to Video",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling/v2-1-master-text-to-video",
+      "description": "Kling V2.1 Master Text to Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling/v2-1-pro",
+      "name": "Kling V2 1 Pro",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling/v2-1-pro",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "kling/v2-1-standard",
+      "name": "Kling V2 1 Standard",
+      "type": "video",
+      "provider": "KuaiShou",
+      "endpoint": "kling/v2-1-standard",
+      "description": "Kling V2 1 Standard video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "luma/modify-video",
+      "name": "Luma Modify Video",
+      "type": "video",
+      "provider": "Luma Labs",
+      "endpoint": "luma/modify-video",
+      "description": "Modify and transform existing videos with AI-powered editing capabilities",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_videos": [
+          "MP4",
+          "MOV"
+        ],
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description of desired modifications"
+          },
+          "video_url": {
+            "type": "string",
+            "description": "URL of the video to modify"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 8,
+          "usd_per_second": 0.04
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "Transform the scene to nighttime",
+        "video_url": "https://example.com/video.mp4",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-characters",
+      "name": "Sora 2 Characters",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-characters",
+      "description": "|",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-image-to-video",
+      "name": "Sora 2 Image To Video",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-image-to-video",
+      "description": "| Options/Constraints |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-pro-image-to-video",
+      "name": "Sora 2 Pro Image To Video",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-pro-image-to-video",
+      "description": "of desired motion",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-pro-storyboard",
+      "name": "Sora 2 Pro Storyboard",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-pro-storyboard",
+      "description": "Sora 2 Pro Storyboard video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-pro-text-to-video",
+      "name": "Sora 2 Pro Text To Video",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-pro-text-to-video",
+      "description": "| Options/Default |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "sora-2-text-to-video",
+      "name": "Sora 2 Text To Video",
+      "type": "video",
+      "provider": "OpenAI",
+      "endpoint": "sora-2-text-to-video",
+      "description": "Sora 2 Text To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "runway/aleph",
+      "name": "Runway Aleph Video",
+      "type": "video",
+      "provider": "Runway",
+      "endpoint": "runway/aleph",
+      "description": "Advanced AI video generation with Runway Aleph model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 12,
+          "usd_per_second": 0.06
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A dramatic scene with cinematic lighting",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "runway/extend",
+      "name": "Runway Extend Video",
+      "type": "video",
+      "provider": "Runway",
+      "endpoint": "runway/extend",
+      "description": "Extend existing videos with AI-generated continuations",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_videos": [
+          "MP4",
+          "MOV"
+        ],
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "video_url": {
+            "type": "string",
+            "description": "URL of the video to extend"
+          }
+        },
+        "optional": {
+          "prompt": {
+            "type": "string",
+            "description": "Optional guidance for the extension"
+          },
+          "duration": {
+            "type": "number",
+            "description": "Extension duration in seconds",
+            "min": 4,
+            "max": 8,
+            "default": 4
+          },
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 8,
+          "usd_per_second": 0.04
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "video_url": "https://example.com/video.mp4",
+        "duration": 4,
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "runway/generate",
+      "name": "Runway AI Video Generation",
+      "type": "video",
+      "provider": "Runway",
+      "endpoint": "runway/generate",
+      "description": "Generate AI videos with advanced cinematic quality and control",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "description": "Video duration in seconds",
+            "min": 5,
+            "max": 10,
+            "default": 5
+          },
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 10,
+          "usd_per_second": 0.05
+        }
+      },
+      "tier": "premium",
+      "example_request": {
+        "prompt": "A cinematic shot of a futuristic city at sunset",
+        "duration": 5,
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "grok-imagine/image-to-video",
+      "name": "Grok Imagine Image To Video",
+      "type": "video",
+      "provider": "xAI",
+      "endpoint": "grok-imagine/image-to-video",
+      "description": "| Default |",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ],
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "JPG",
+          "WEBP"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "JPG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    },
+    {
+      "id": "grok-imagine/text-to-video",
+      "name": "Grok Imagine Text To Video",
+      "type": "video",
+      "provider": "xAI",
+      "endpoint": "grok-imagine/text-to-video",
+      "description": "Grok Imagine Text To Video video generation model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "MP4"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text description for video generation"
+          }
+        },
+        "optional": {
+          "mode": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "720p",
+              "1080p"
+            ],
+            "default": "720p"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_second": 5,
+          "usd_per_second": 0.025
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A cinematic video of a sunset over mountains",
+        "mode": "720p"
+      }
+    }
+  ]
+}

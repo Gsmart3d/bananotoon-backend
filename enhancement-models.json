@@ -1,0 +1,388 @@
+{
+  "version": "1.0.0",
+  "category": "enhancement",
+  "total": 8,
+  "models": [
+    {
+      "id": "grok-imagine-upscale",
+      "name": "Grok Imagine Image Upscale",
+      "type": "enhancement",
+      "provider": "Kie AI",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Enhance image resolution and quality using advanced AI upscaling",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input": ["Task ID from Kie AI generated images"],
+        "output": ["PNG", "JPG"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["grok-imagine/upscale"],
+            "default": "grok-imagine/upscale"
+          },
+          "task_id": {
+            "type": "string",
+            "description": "Task ID from prior image generation",
+            "max_length": 100
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications"
+          }
+        }
+      },
+      "processing_details": {
+        "generation_time_standard": "8-12 seconds",
+        "generation_time_high_res": "12-18 seconds",
+        "rate_limits": {
+          "concurrent_tasks": 40,
+          "hourly_limit": 400
+        },
+        "output_validity": "24 hours"
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "grok-imagine/upscale",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "task_id": "task_grok_12345678"
+        }
+      }
+    },
+    {
+      "id": "recraft-crisp-upscale",
+      "name": "Recraft Crisp Upscale",
+      "type": "enhancement",
+      "provider": "Recraft",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Enhance image resolution and quality using advanced AI upscaling",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_images": ["JPEG", "PNG", "WEBP"],
+        "max_size_mb": 10,
+        "output": ["PNG", "JPG"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["recraft/crisp-upscale"],
+            "default": "recraft/crisp-upscale"
+          },
+          "image": {
+            "type": "string",
+            "description": "Image URL to upscale",
+            "format": "URL"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "recraft/crisp-upscale",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "image": "https://file.aiquickdraw.com/custom-page/akr/section-images/1757169577325ijj8vwvt.jpg"
+        }
+      }
+    },
+    {
+      "id": "recraft-remove-background",
+      "name": "Recraft Remove Background",
+      "type": "enhancement",
+      "provider": "Recraft",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Remove background by recraft/remove-background",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_images": ["PNG", "JPG", "WEBP"],
+        "max_size_mb": 5,
+        "max_resolution_mp": 16,
+        "max_dimension_px": 4096,
+        "min_dimension_px": 256,
+        "output": ["PNG"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["recraft/remove-background"],
+            "default": "recraft/remove-background"
+          },
+          "image": {
+            "type": "string",
+            "description": "Image URL after upload",
+            "format": "URL"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "recraft/remove-background",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "image": "https://file.aiquickdraw.com/custom-page/akr/section-images/1757057285447k9qcbki1.webp"
+        }
+      }
+    },
+    {
+      "id": "topaz-image-upscale",
+      "name": "Topaz Image Upscale",
+      "type": "enhancement",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Enhance image resolution and quality using advanced AI upscaling powered by Topaz",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_images": ["JPEG", "PNG", "WEBP"],
+        "max_size_mb": 10,
+        "output": ["PNG", "JPG"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["topaz/image-upscale"],
+            "default": "topaz/image-upscale"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image URL to upscale",
+            "format": "URL"
+          },
+          "upscale_factor": {
+            "type": "string",
+            "description": "Multiplier for width/height",
+            "options": ["1", "2", "4", "8"],
+            "default": "2"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "topaz/image-upscale",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "image_url": "https://static.aiquickdraw.com/tools/example/1762752805607_mErUj1KR.png",
+          "upscale_factor": "2"
+        }
+      }
+    },
+    {
+      "id": "topaz-video-upscale",
+      "name": "Topaz Video Upscale",
+      "type": "enhancement",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Enhance video resolution and quality using advanced AI upscaling",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_videos": ["MP4", "MOV", "MKV"],
+        "max_size_mb": 10,
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["topaz/video-upscale"],
+            "default": "topaz/video-upscale"
+          },
+          "video_url": {
+            "type": "string",
+            "description": "Video URL to upscale",
+            "format": "URL"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications"
+          },
+          "upscale_factor": {
+            "type": "string",
+            "description": "Scaling multiplier",
+            "options": ["1", "2", "4"],
+            "default": "2"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "topaz/video-upscale",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "video_url": "https://file.aiquickdraw.com/custom-page/akr/section-images/1758166466095hvbwkrpw.mp4",
+          "upscale_factor": "2"
+        }
+      }
+    },
+    {
+      "id": "sora-watermark-remover",
+      "name": "Sora Watermark Remover",
+      "type": "enhancement",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate content using sora-watermark-remover for removing watermarks from Sora 2 videos",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_videos": ["Sora 2 video URLs from OpenAI"],
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["sora-watermark-remover"],
+            "default": "sora-watermark-remover"
+          },
+          "video_url": {
+            "type": "string",
+            "description": "Sora 2 video URL (must be publicly accessible from OpenAI)",
+            "max_length": 500,
+            "format": "URL"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "sora-watermark-remover",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "video_url": "https://sora.chatgpt.com/p/s_68e83bd7eee88191be79d2ba7158516f"
+        }
+      }
+    },
+    {
+      "id": "suno-generate-midi",
+      "name": "Suno Generate MIDI",
+      "type": "enhancement",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/midi/generate",
+      "description": "Convert separated audio tracks into MIDI format with detailed note information for each instrument",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["Separated audio tracks from vocal separation"],
+        "output": ["MIDI"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string",
+            "description": "Task ID from completed vocal separation task"
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Endpoint URL receiving MIDI generation completion notifications"
+          }
+        },
+        "optional": {
+          "audioId": {
+            "type": "string",
+            "description": "Specifies which separated track generates MIDI",
+            "default": "All tracks"
+          }
+        }
+      },
+      "processing_details": {
+        "duration": "30-90 seconds depending on complexity",
+        "data_retention": "14 days",
+        "prerequisites": "Completed vocal separation via Stem Separation API"
+      },
+      "output_specifications": {
+        "note_details": ["pitch (MIDI number)", "start (seconds)", "end (seconds)", "velocity (0-1 range)"]
+      },
+      "pricing": {
+        "note": "Check per-call credit costs at https://kie.ai/pricing"
+      },
+      "tier": "standard",
+      "example_request": {
+        "taskId": "5c79****be8e",
+        "audioId": "e231****-****-****-****-****8cadc7dc",
+        "callBackUrl": "https://api.example.com/callback"
+      }
+    },
+    {
+      "id": "suno-convert-to-wav",
+      "name": "Suno Convert to WAV",
+      "type": "enhancement",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/wav/generate",
+      "description": "Convert an existing music track to high-quality WAV format for professional editing and processing while maintaining original audio quality",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["Generated music tracks (from Generate Music or Extend Music endpoints)"],
+        "output": ["WAV (uncompressed audio)"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string",
+            "description": "Unique identifier from music generation task"
+          },
+          "audioId": {
+            "type": "string",
+            "description": "Specific audio track identifier from callback data"
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Endpoint receiving POST updates on conversion completion",
+            "format": "URL"
+          }
+        },
+        "optional": {}
+      },
+      "processing_details": {
+        "file_retention": "14 days",
+        "file_size_note": "typically 5-10 times larger than MP3 equivalents",
+        "processing_time": "varies by audio length"
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "taskId": "5c79****be8e",
+        "audioId": "e231****-****-****-****-****8cadc7dc",
+        "callBackUrl": "https://api.example.com/callback"
+      }
+    }
+  ]
+}

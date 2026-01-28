@@ -1,0 +1,947 @@
+{
+  "version": "1.0.0",
+  "category": "audio",
+  "total": 18,
+  "models": [
+    {
+      "id": "elevenlabs-audio-isolation",
+      "name": "ElevenLabs Audio Isolation",
+      "type": "audio",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Isolates voice from audio files, removing background noise and other non-voice elements",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input": ["MP3", "WAV", "AAC", "MP4", "OGG"],
+        "output": ["MP3", "WAV"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/audio-isolation"
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "URL pointing to uploaded audio file",
+            "max_size_mb": 10,
+            "accepted_formats": ["MP3", "WAV", "AAC", "MP4", "OGG"]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint for task completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "elevenlabs-sound-effect-v2",
+      "name": "ElevenLabs Sound Effect V2",
+      "type": "audio",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate sound effects based on text descriptions",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": ["MP3", "PCM", "OPUS"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/sound-effect-v2"
+          },
+          "text": {
+            "type": "string",
+            "description": "Sound effect description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "loop": {
+            "type": "boolean",
+            "default": false
+          },
+          "duration_seconds": {
+            "type": "number",
+            "min": 0.5,
+            "max": 22,
+            "default": "auto"
+          },
+          "prompt_influence": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0.3
+          },
+          "output_format": {
+            "type": "string",
+            "default": "mp3_44100_128"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "elevenlabs-speech-to-text",
+      "name": "ElevenLabs Speech to Text",
+      "type": "audio",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Speech-to-text transcription service",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input": ["MPEG", "WAV", "AAC", "MP4", "OGG"],
+        "output": ["TEXT", "JSON"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/speech-to-text"
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "Audio file URL",
+            "max_size_mb": 200
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "language_code": {
+            "type": "string",
+            "max_length": 500
+          },
+          "tag_audio_events": {
+            "type": "boolean",
+            "default": false
+          },
+          "diarize": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "elevenlabs-text-to-dialogue-v3",
+      "name": "ElevenLabs Text to Dialogue V3",
+      "type": "voice",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generates dialogue speech by converting text input with multiple voice characters into audio output",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/text-to-dialogue-v3"
+          },
+          "dialogue": {
+            "type": "array",
+            "description": "Array of dialogue items with text and voice",
+            "max_combined_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "stability": {
+            "type": "number",
+            "options": [0, 0.5, 1.0],
+            "default": 0.5
+          },
+          "language_code": {
+            "type": "string",
+            "default": "auto"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_1000_chars": 14,
+          "usd_per_1000_chars": 0.07
+        }
+      },
+      "tier": "premium"
+    },
+    {
+      "id": "elevenlabs-text-to-speech-multilingual-v2",
+      "name": "ElevenLabs Text to Speech Multilingual V2",
+      "type": "voice",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Converts text input to multilingual speech output with voice customization options",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/text-to-speech-multilingual-v2"
+          },
+          "text": {
+            "type": "string",
+            "max_length": 5000
+          },
+          "voice": {
+            "type": "string",
+            "options": ["Rachel", "Aria", "Roger", "Sarah", "Laura", "Charlie", "George", "Callum", "River", "Liam", "Charlotte", "Alice", "Matilda", "Will", "Jessica", "Eric", "Chris", "Brian", "Daniel", "Lily", "Bill"],
+            "default": "Rachel"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "stability": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0.5
+          },
+          "similarity_boost": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0.75
+          },
+          "style": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0
+          },
+          "speed": {
+            "type": "number",
+            "min": 0.7,
+            "max": 1.2,
+            "default": 1.0
+          },
+          "timestamps": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "elevenlabs-text-to-speech-turbo-2-5",
+      "name": "ElevenLabs Text to Speech Turbo 2.5",
+      "type": "voice",
+      "provider": "ElevenLabs",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Converts text content into natural-sounding speech with customizable voice characteristics",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "elevenlabs/text-to-speech-turbo-2-5"
+          },
+          "text": {
+            "type": "string",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "voice": {
+            "type": "string",
+            "options": ["Rachel", "Aria", "Roger", "Sarah", "Laura", "Charlie", "George", "Callum", "River", "Liam", "Charlotte", "Alice", "Matilda", "Will", "Jessica", "Eric", "Chris", "Brian", "Daniel", "Lily", "Bill"],
+            "default": "Rachel"
+          },
+          "stability": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0.5
+          },
+          "similarity_boost": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0.75
+          },
+          "style": {
+            "type": "number",
+            "min": 0,
+            "max": 1,
+            "default": 0
+          },
+          "speed": {
+            "type": "number",
+            "min": 0.7,
+            "max": 1.2,
+            "default": 1.0
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "infinitalk-from-audio",
+      "name": "Infinitalk From Audio",
+      "type": "video",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generates video content by combining a static image with audio, guided by a text prompt",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": ["JPEG", "PNG", "WEBP"],
+        "input_audio": ["MP3", "WAV", "AAC", "MP4", "OGG"],
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "value": "infinitalk/from-audio"
+          },
+          "image_url": {
+            "type": "string",
+            "max_size_mb": 10
+          },
+          "audio_url": {
+            "type": "string",
+            "max_size_mb": 10
+          },
+          "prompt": {
+            "type": "string",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string",
+            "options": ["480p", "720p"],
+            "default": "480p"
+          },
+          "seed": {
+            "type": "number",
+            "min": 10000,
+            "max": 1000000
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-generate-music",
+      "name": "Suno Generate Music",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate",
+      "description": "Creates musical compositions based on text prompts with multiple variations",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "customMode": {
+            "type": "boolean"
+          },
+          "instrumental": {
+            "type": "boolean"
+          },
+          "callBackUrl": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "options": ["V4", "V4_5", "V4_5PLUS", "V4_5ALL", "V5"]
+          },
+          "prompt": {
+            "type": "string",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "style": {
+            "type": "string",
+            "max_length": 1000
+          },
+          "title": {
+            "type": "string",
+            "max_length": 100
+          },
+          "negativeTags": {
+            "type": "string"
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "personaId": {
+            "type": "string"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-generate-lyrics",
+      "name": "Suno Generate Lyrics",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/lyrics",
+      "description": "Creates lyrics for music composition producing multiple variations with titles",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["TEXT"]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "max_length": 200,
+            "description": "Theme/style description"
+          },
+          "callBackUrl": {
+            "type": "string"
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-add-vocals",
+      "name": "Suno Add Vocals",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/add-vocals",
+      "description": "Generate music with vocals based on uploaded audio files by layering AI-generated vocals onto existing instrumentals",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["MP3"],
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "uploadUrl": {
+            "type": "string"
+          },
+          "callBackUrl": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "negativeTags": {
+            "type": "string"
+          },
+          "style": {
+            "type": "string"
+          }
+        },
+        "optional": {
+          "model": {
+            "type": "string",
+            "options": ["V4_5PLUS", "V5"],
+            "default": "V4_5PLUS"
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-add-instrumental",
+      "name": "Suno Add Instrumental",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/add-instrumental",
+      "description": "Generate instrumental accompaniment based on uploaded audio files",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["MP3"],
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "uploadUrl": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "negativeTags": {
+            "type": "string"
+          },
+          "callBackUrl": {
+            "type": "string"
+          }
+        },
+        "optional": {
+          "model": {
+            "type": "string",
+            "options": ["V4_5PLUS", "V5"],
+            "default": "V4_5PLUS"
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-extend-music",
+      "name": "Suno Extend Music",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/extend",
+      "description": "Extend or modify existing music by creating a continuation based on a source audio track",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "defaultParamFlag": {
+            "type": "boolean"
+          },
+          "audioId": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "options": ["V4", "V4_5", "V4_5PLUS", "V4_5ALL", "V5"]
+          },
+          "callBackUrl": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string",
+            "max_length": 5000
+          },
+          "style": {
+            "type": "string",
+            "max_length": 1000
+          },
+          "title": {
+            "type": "string",
+            "max_length": 100
+          },
+          "continueAt": {
+            "type": "number",
+            "description": "Start time in seconds"
+          }
+        },
+        "optional": {
+          "negativeTags": {
+            "type": "string"
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "personaId": {
+            "type": "string"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-upload-and-extend-audio",
+      "name": "Suno Upload and Extend Audio",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/upload-extend",
+      "description": "Extends audio tracks while preserving the original style. Includes upload functionality for audio file processing",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["MP3", "WAV"],
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "uploadUrl": {
+            "type": "string",
+            "description": "Max 8 min audio"
+          },
+          "defaultParamFlag": {
+            "type": "boolean"
+          },
+          "callBackUrl": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string",
+            "options": ["V4", "V4_5", "V4_5PLUS", "V4_5ALL", "V5"]
+          },
+          "instrumental": {
+            "type": "boolean"
+          },
+          "continueAt": {
+            "type": "number",
+            "description": "Start time in seconds"
+          }
+        },
+        "optional": {
+          "prompt": {
+            "type": "string",
+            "max_length": 5000
+          },
+          "style": {
+            "type": "string",
+            "max_length": 1000
+          },
+          "title": {
+            "type": "string",
+            "max_length": 100
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "personaId": {
+            "type": "string"
+          },
+          "negativeTags": {
+            "type": "string"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-upload-and-cover-audio",
+      "name": "Suno Upload and Cover Audio",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/upload-cover",
+      "description": "Transforms an uploaded audio track into a new musical style while preserving the original melody",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input": ["MP3", "WAV"],
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "uploadUrl": {
+            "type": "string",
+            "description": "Max 8 min audio"
+          },
+          "customMode": {
+            "type": "boolean"
+          },
+          "instrumental": {
+            "type": "boolean"
+          },
+          "model": {
+            "type": "string",
+            "options": ["V4", "V4_5", "V4_5PLUS", "V4_5ALL", "V5"]
+          },
+          "prompt": {
+            "type": "string",
+            "max_length": 5000
+          },
+          "callBackUrl": {
+            "type": "string"
+          }
+        },
+        "optional": {
+          "style": {
+            "type": "string",
+            "max_length": 1000
+          },
+          "title": {
+            "type": "string",
+            "max_length": 100
+          },
+          "negativeTags": {
+            "type": "string"
+          },
+          "vocalGender": {
+            "type": "string",
+            "options": ["m", "f"]
+          },
+          "styleWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "weirdnessConstraint": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "audioWeight": {
+            "type": "number",
+            "min": 0,
+            "max": 1
+          },
+          "personaId": {
+            "type": "string"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-replace-section",
+      "name": "Suno Replace Music Section",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/replace-section",
+      "description": "Modify specific time segments within previously generated music while maintaining seamless blending",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["MP3"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string"
+          },
+          "audioId": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "infillStartS": {
+            "type": "number",
+            "description": "Start time in seconds"
+          },
+          "infillEndS": {
+            "type": "number",
+            "description": "End time in seconds"
+          }
+        },
+        "optional": {
+          "negativeTags": {
+            "type": "string"
+          },
+          "fullLyrics": {
+            "type": "string"
+          },
+          "callBackUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-boost-music-style",
+      "name": "Suno Boost Music Style",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/style/generate",
+      "description": "Generates enhanced music style descriptions from conversational prompts for nuanced artistic direction",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["TEXT"]
+      },
+      "parameters": {
+        "required": {
+          "content": {
+            "type": "string",
+            "description": "Style description in concise, clear language"
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-generate-persona",
+      "name": "Suno Generate Persona",
+      "type": "music",
+      "provider": "Suno",
+      "endpoint": "/api/v1/generate/generate-persona",
+      "description": "Create a personalized music Persona based on generated music, giving the music a unique identity",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["JSON"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string"
+          },
+          "audioId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {},
+      "tier": "standard"
+    },
+    {
+      "id": "suno-separate-vocals",
+      "name": "Suno Vocal Separation",
+      "type": "audio",
+      "provider": "Suno",
+      "endpoint": "/api/v1/vocal-removal/generate",
+      "description": "Splits audio tracks into vocal, instrumental, and individual instrument components using AI-powered source separation",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["MP3", "WAV"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string"
+          },
+          "audioId": {
+            "type": "string"
+          },
+          "callBackUrl": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "options": ["separate_vocal", "split_stem"],
+            "default": "separate_vocal"
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {},
+      "tier": "standard"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "version": "1.0.0",
+  "category": "avatar",
+  "total": 4,
+  "models": [
+    {
+      "id": "kling-ai-avatar-standard",
+      "name": "Kling AI Avatar Standard",
+      "type": "avatar",
+      "category": "avatar",
+      "provider": "Kling",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate lifelike talking avatars from photos and audio with accurate lip sync using Kling AI Avatar Standard",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": ["JPEG", "PNG", "WEBP"],
+        "input_audio": ["MP3", "WAV", "AAC", "MP4", "OGG"],
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["kling/ai-avatar-standard"],
+            "default": "kling/ai-avatar-standard"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Avatar photo URL",
+            "max_size_mb": 10,
+            "accepted_formats": ["JPEG", "PNG", "WEBP"]
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "Audio file URL for lip sync",
+            "max_size_mb": 10,
+            "accepted_formats": ["MP3", "WAV", "AAC", "MP4", "OGG"]
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Generation prompt",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications (recommended for production)"
+          }
+        }
+      },
+      "pricing": {
+        "tier": "standard",
+        "notes": "Pricing not specified in documentation"
+      },
+      "tier": "standard",
+      "example_request": {
+        "model": "kling/ai-avatar-standard",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "image_url": "https://file.aiquickdraw.com/custom-page/akr/section-images/17579268936223zs9l3dt.png",
+          "audio_url": "https://file.aiquickdraw.com/custom-page/akr/section-images/17579258340109gghun47.mp3",
+          "prompt": ""
+        }
+      }
+    },
+    {
+      "id": "kling-ai-avatar-pro",
+      "name": "Kling AI Avatar Pro",
+      "type": "avatar",
+      "category": "avatar",
+      "provider": "Kling",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate lifelike talking avatars from photos and audio with advanced features and enhanced quality",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": ["JPEG", "PNG", "WEBP"],
+        "input_audio": ["MPEG", "WAV", "AAC", "MP4", "OGG"],
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": ["kling/ai-avatar-pro"],
+            "default": "kling/ai-avatar-pro"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Avatar image file URL",
+            "max_size_mb": 10,
+            "accepted_formats": ["JPEG", "PNG", "WEBP"]
+          },
+          "audio_url": {
+            "type": "string",
+            "description": "Audio file URL for lip sync",
+            "max_size_mb": 10,
+            "accepted_formats": ["MPEG", "WAV", "AAC", "MP4", "OGG"]
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Generation prompt",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications (recommended for production)"
+          }
+        }
+      },
+      "pricing": {
+        "tier": "pro",
+        "notes": "Pricing not specified in documentation. Check account credits via Common API endpoint."
+      },
+      "tier": "pro",
+      "example_request": {
+        "model": "kling/ai-avatar-pro",
+        "callBackUrl": "https://your-domain.com/api/callback",
+        "input": {
+          "image_url": "https://file.aiquickdraw.com/custom-page/akr/section-images/175792685809077e8h8k3.png",
+          "audio_url": "https://file.aiquickdraw.com/custom-page/akr/section-images/1757925802302srqfkcqh.mp3",
+          "prompt": ""
+        }
+      }
+    },
+    {
+      "id": "suno-generate-music-cover",
+      "name": "Suno Generate Music Cover",
+      "type": "avatar",
+      "category": "avatar",
+      "provider": "Suno",
+      "endpoint": "/api/v1/suno/cover/generate",
+      "description": "Generate personalized cover images based on original music tasks with typically 2 different style options for selection. Image URLs remain accessible for 14 days.",
+      "channel": "suno_api",
+      "supported_formats": {
+        "output": ["PNG", "JPG"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string",
+            "description": "Original music generation task identifier"
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint for completion notifications; receives POST requests with task results"
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "tier": "standard",
+        "notes": "Credit-based billing. Insufficient credits error (402) suggests credit system."
+      },
+      "tier": "standard",
+      "retention": "14 days",
+      "response_codes": {
+        "200": "Success - Returns taskId for cover generation task",
+        "400": "Cover exists",
+        "401": "Authentication failed",
+        "402": "Insufficient credits",
+        "404": "Not found",
+        "409": "Conflict",
+        "422": "Validation error",
+        "429": "Rate limited",
+        "455": "Maintenance",
+        "500": "Server error"
+      },
+      "example_request": {
+        "taskId": "73d6128b3523a0079df10da9471017c8",
+        "callBackUrl": "https://api.example.com/callback"
+      }
+    },
+    {
+      "id": "suno-create-music-video",
+      "name": "Suno Create Music Video",
+      "type": "avatar",
+      "category": "avatar",
+      "provider": "Suno",
+      "endpoint": "/api/v1/mp4/generate",
+      "description": "Generate visually enhanced videos from audio tracks with customizable branding and artist attribution suitable for social media distribution",
+      "channel": "suno_api",
+      "supported_formats": {
+        "input_audio": ["MP3", "WAV", "AAC", "OGG"],
+        "output": ["MP4"]
+      },
+      "parameters": {
+        "required": {
+          "taskId": {
+            "type": "string",
+            "description": "Identifier from music generation task"
+          },
+          "audioId": {
+            "type": "string",
+            "description": "Specific audio track ID to visualize (UUID format)"
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Endpoint receiving POST completion notifications"
+          }
+        },
+        "optional": {
+          "author": {
+            "type": "string",
+            "description": "Artist/creator name displayed on video cover",
+            "max_length": 50
+          },
+          "domainName": {
+            "type": "string",
+            "description": "Brand/website watermark at video bottom",
+            "max_length": 50
+          }
+        }
+      },
+      "pricing": {
+        "tier": "standard",
+        "notes": "Pricing not specified in documentation"
+      },
+      "tier": "standard",
+      "retention": "14 days",
+      "constraints": {
+        "video_retention": "14 days",
+        "processing_time": "Variable based on audio length and server load",
+        "authentication": "Bearer token required"
+      },
+      "example_request": {
+        "taskId": "taskId_774b9aa0422f",
+        "audioId": "e231****-****-****-****-****8cadc7dc",
+        "callBackUrl": "https://api.example.com/callback",
+        "author": "DJ Electronic",
+        "domainName": "music.example.com"
+      }
+    }
+  ]
+}

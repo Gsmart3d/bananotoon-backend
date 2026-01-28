@@ -1,0 +1,2673 @@
+{
+  "version": "1.0.0",
+  "category": "image",
+  "total": 29,
+  "models": [
+    {
+      "id": "4o-image",
+      "name": "4o Image API (GPT Image 1)",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/gpt4o-image/generate",
+      "description": "Create a new 4o Image generation task. Generated images are stored for 14 days, after which they expire.",
+      "channel": "kie_api",
+      "supported_formats": {
+        "input_images": [
+          "JFIF",
+          "PJPEG",
+          "JPEG",
+          "PJP",
+          "JPG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "size": {
+            "type": "string",
+            "description": "Output image aspect ratio",
+            "options": [
+              "1:1",
+              "3:2",
+              "2:3"
+            ]
+          }
+        },
+        "optional": {
+          "prompt": {
+            "type": "string",
+            "description": "Text prompt for image generation"
+          },
+          "filesUrl": {
+            "type": "array",
+            "description": "Up to 5 image URLs",
+            "max_count": 5,
+            "accepted_formats": [
+              "JFIF",
+              "PJPEG",
+              "JPEG",
+              "PJP",
+              "JPG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "maskUrl": {
+            "type": "string",
+            "description": "Mask image for selective modification",
+            "max_size_mb": 25
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for task completion notifications"
+          },
+          "isEnhance": {
+            "type": "boolean",
+            "description": "Enable prompt refinement",
+            "default": false
+          },
+          "uploadCn": {
+            "type": "boolean",
+            "description": "Route uploads via China servers",
+            "default": false
+          },
+          "enableFallback": {
+            "type": "boolean",
+            "description": "Activate fallback to backup models",
+            "default": false
+          },
+          "fallbackModel": {
+            "type": "string",
+            "description": "Fallback model selection",
+            "options": [
+              "GPT_IMAGE_1",
+              "FLUX_MAX"
+            ],
+            "default": "FLUX_MAX"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "filesUrl": [
+          "https://example.com/image.png"
+        ],
+        "prompt": "A beautiful sunset over the mountains",
+        "size": "1:1",
+        "isEnhance": false
+      }
+    },
+    {
+      "id": "flux-kontext-pro",
+      "name": "Flux Kontext AI Image Generation",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/flux/kontext/generate",
+      "description": "Create a new image generation or editing task using the Flux Kontext AI model",
+      "channel": "kie_api",
+      "supported_formats": {
+        "output": [
+          "JPEG",
+          "PNG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "description": "Text describing desired image or edits (English only)"
+          }
+        },
+        "optional": {
+          "model": {
+            "type": "string",
+            "description": "Model variant selection",
+            "options": [
+              "flux-kontext-pro",
+              "flux-kontext-max"
+            ],
+            "default": "flux-kontext-pro"
+          },
+          "aspectRatio": {
+            "type": "string",
+            "description": "Output aspect ratio",
+            "options": [
+              "21:9",
+              "16:9",
+              "4:3",
+              "1:1",
+              "3:4",
+              "9:16"
+            ],
+            "default": "16:9"
+          },
+          "outputFormat": {
+            "type": "string",
+            "description": "Output file format",
+            "options": [
+              "jpeg",
+              "png"
+            ],
+            "default": "jpeg"
+          },
+          "enableTranslation": {
+            "type": "boolean",
+            "description": "Auto-translate prompts",
+            "default": true
+          },
+          "inputImage": {
+            "type": "string",
+            "description": "Input image URL for editing mode"
+          },
+          "promptUpsampling": {
+            "type": "boolean",
+            "description": "Enhance prompt quality",
+            "default": false
+          },
+          "safetyTolerance": {
+            "type": "integer",
+            "description": "Content safety filtering level",
+            "min": 0,
+            "max": 6,
+            "default": 2
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          },
+          "uploadCn": {
+            "type": "boolean",
+            "description": "Use China upload servers",
+            "default": false
+          },
+          "watermark": {
+            "type": "string",
+            "description": "Custom identifier watermark"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "prompt": "A serene mountain landscape at sunset with a lake reflecting the orange sky",
+        "aspectRatio": "16:9",
+        "outputFormat": "jpeg",
+        "model": "flux-kontext-pro"
+      }
+    },
+    {
+      "id": "gpt-image-1.5-text-to-image",
+      "name": "GPT Image 1.5 Text To Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate content using the GPT Image 1.5 Text To Image model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "gpt-image/1.5-text-to-image"
+            ],
+            "default": "gpt-image/1.5-text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description of desired image content"
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Image dimension ratio",
+            "options": [
+              "1:1",
+              "2:3",
+              "3:2"
+            ],
+            "default": "1:1"
+          },
+          "quality": {
+            "type": "string",
+            "description": "Output quality level",
+            "options": [
+              "medium",
+              "high"
+            ],
+            "default": "medium"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "gpt-image/1.5-text-to-image",
+        "input": {
+          "prompt": "Create a photorealistic candid photograph of an elderly sailor...",
+          "aspect_ratio": "1:1",
+          "quality": "medium"
+        }
+      }
+    },
+    {
+      "id": "gpt-image-1.5-image-to-image",
+      "name": "GPT Image 1.5 Image To Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Edit or modify existing images using text prompts",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "gpt-image/1.5-image-to-image"
+            ],
+            "default": "gpt-image/1.5-image-to-image"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "max_count": 16,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description of desired modifications"
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output image dimensions",
+            "options": [
+              "1:1",
+              "2:3",
+              "3:2"
+            ],
+            "default": "3:2"
+          },
+          "quality": {
+            "type": "string",
+            "description": "Output quality level",
+            "options": [
+              "medium",
+              "high"
+            ],
+            "default": "medium"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "gpt-image/1.5-image-to-image",
+        "input": {
+          "input_urls": [
+            "https://example.com/image.webp"
+          ],
+          "prompt": "Modify clothing while preserving likeness and expression",
+          "aspect_ratio": "3:2",
+          "quality": "medium"
+        }
+      }
+    },
+    {
+      "id": "flux-2-flex-text-to-image",
+      "name": "Flux-2 Flex Text-to-Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Flux-2's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "flux-2/flex-text-to-image"
+            ],
+            "default": "flux-2/flex-text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "min_length": 3,
+            "max_length": 5000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "3:2",
+              "2:3",
+              "auto"
+            ],
+            "default": "1:1"
+          },
+          "resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K"
+            ],
+            "default": "1K"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for async notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "flux-2/flex-text-to-image",
+        "input": {
+          "prompt": "A humanoid figure with a vintage television set for a head...",
+          "aspect_ratio": "1:1",
+          "resolution": "1K"
+        }
+      }
+    },
+    {
+      "id": "flux-2-flex-image-to-image",
+      "name": "Flux-2 Flex Image-to-Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generates images based on reference images and text prompts",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "flux-2/flex-image-to-image"
+            ],
+            "default": "flux-2/flex-image-to-image"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Reference images",
+            "min_count": 1,
+            "max_count": 8,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "min_length": 3,
+            "max_length": 5000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "3:2",
+              "2:3",
+              "auto"
+            ],
+            "default": "1:1"
+          },
+          "resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K"
+            ],
+            "default": "1K"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "flux-2/flex-image-to-image",
+        "input": {
+          "input_urls": [
+            "https://example.com/image1.png"
+          ],
+          "prompt": "Replace the can in image 2 with the can from image 1",
+          "aspect_ratio": "1:1",
+          "resolution": "1K"
+        }
+      }
+    },
+    {
+      "id": "flux-2-pro-text-to-image",
+      "name": "Flux-2 Pro Text to Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Flux-2's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "flux-2/pro-text-to-image"
+            ],
+            "default": "flux-2/pro-text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "min_length": 3,
+            "max_length": 5000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Image dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "3:2",
+              "2:3",
+              "auto"
+            ],
+            "default": "1:1"
+          },
+          "resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K"
+            ],
+            "default": "1K"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for notifications"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "flux-2/pro-text-to-image",
+        "input": {
+          "prompt": "Hyperrealistic supermarket blister pack...",
+          "aspect_ratio": "1:1",
+          "resolution": "1K"
+        }
+      }
+    },
+    {
+      "id": "flux-2-pro-image-to-image",
+      "name": "Flux-2 Pro Image to Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generate content using flux-2/pro-image-to-image via reference images and text prompts",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "flux-2/pro-image-to-image"
+            ],
+            "default": "flux-2/pro-image-to-image"
+          },
+          "input_urls": {
+            "type": "array",
+            "description": "Reference images",
+            "min_count": 1,
+            "max_count": 8,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "min_length": 3,
+            "max_length": 5000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "3:2",
+              "2:3",
+              "auto"
+            ],
+            "default": "1:1"
+          },
+          "resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K"
+            ],
+            "default": "1K"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "flux-2/pro-image-to-image",
+        "input": {
+          "input_urls": [
+            "https://example.com/image.png"
+          ],
+          "prompt": "Transform this image...",
+          "aspect_ratio": "1:1",
+          "resolution": "1K"
+        }
+      }
+    },
+    {
+      "id": "google-imagen4",
+      "name": "Google Imagen4",
+      "type": "image",
+      "provider": "Google",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by Google imagen4",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "google/imagen4"
+            ],
+            "default": "google/imagen4"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Content to discourage",
+            "max_length": 5000,
+            "default": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "16:9",
+              "9:16",
+              "3:4",
+              "4:3"
+            ],
+            "default": "1:1"
+          },
+          "seed": {
+            "type": "string",
+            "description": "Reproducibility seed",
+            "max_length": 500,
+            "default": ""
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "google/imagen4",
+        "input": {
+          "prompt": "A lively comic scene...",
+          "aspect_ratio": "1:1"
+        }
+      }
+    },
+    {
+      "id": "google-imagen4-fast",
+      "name": "Google Imagen4-Fast",
+      "type": "image",
+      "provider": "Google",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by Google imagen4-fast",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "google/imagen4-fast"
+            ],
+            "default": "google/imagen4-fast"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Discourage unwanted elements",
+            "max_length": 5000,
+            "default": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "16:9",
+              "9:16",
+              "3:4",
+              "4:3"
+            ],
+            "default": "16:9"
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Quantity to generate",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default": "1"
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Reproducible results"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "google/imagen4-fast",
+        "input": {
+          "prompt": "Cinematic scene with nostalgic 90s aesthetic",
+          "aspect_ratio": "16:9",
+          "num_images": "1"
+        }
+      }
+    },
+    {
+      "id": "google-imagen4-ultra",
+      "name": "Google Imagen4-Ultra",
+      "type": "image",
+      "provider": "Google",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by Google imagen4-ultra",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "google/imagen4-ultra"
+            ],
+            "default": "google/imagen4-ultra"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Content to discourage",
+            "max_length": 5000,
+            "default": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Image dimensions",
+            "options": [
+              "1:1",
+              "16:9",
+              "9:16",
+              "3:4",
+              "4:3"
+            ],
+            "default": "1:1"
+          },
+          "seed": {
+            "type": "string",
+            "description": "Reproducibility seed",
+            "max_length": 500,
+            "default": ""
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "premium",
+      "example_request": {
+        "model": "google/imagen4-ultra",
+        "input": {
+          "prompt": "A lively comic scene...",
+          "aspect_ratio": "1:1"
+        }
+      }
+    },
+    {
+      "id": "google-nano-banana",
+      "name": "Google Nano Banana",
+      "type": "image",
+      "provider": "Google",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Content generation using google/nano-banana",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPEG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "google/nano-banana"
+            ],
+            "default": "google/nano-banana"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Image generation prompt",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "output_format": {
+            "type": "string",
+            "description": "Output file format",
+            "options": [
+              "png",
+              "jpeg"
+            ],
+            "default": "png"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output aspect ratio",
+            "options": [
+              "1:1",
+              "9:16",
+              "16:9",
+              "3:4",
+              "4:3",
+              "3:2",
+              "2:3",
+              "5:4",
+              "4:5",
+              "21:9",
+              "auto"
+            ],
+            "default": "1:1"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "google/nano-banana",
+        "input": {
+          "prompt": "A surreal painting of a giant banana floating in space",
+          "output_format": "png",
+          "image_size": "1:1"
+        }
+      }
+    },
+    {
+      "id": "google-nano-banana-edit",
+      "name": "Google Nano Banana Edit",
+      "type": "image",
+      "provider": "Google",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image editing using Google's Nano Banana Edit model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPEG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "google/nano-banana-edit"
+            ],
+            "default": "google/nano-banana-edit"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Edit instruction",
+            "max_length": 5000
+          },
+          "image_urls": {
+            "type": "array",
+            "description": "Input images",
+            "max_count": 10,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "output_format": {
+            "type": "string",
+            "description": "Output format",
+            "options": [
+              "png",
+              "jpeg"
+            ],
+            "default": "png"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "9:16",
+              "16:9",
+              "3:4",
+              "4:3",
+              "3:2",
+              "2:3",
+              "5:4",
+              "4:5",
+              "21:9",
+              "auto"
+            ],
+            "default": "1:1"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "google/nano-banana-edit",
+        "input": {
+          "prompt": "turn this photo into a character figure",
+          "image_urls": [
+            "https://file.aiquickdraw.com/..."
+          ],
+          "output_format": "png"
+        }
+      }
+    },
+    {
+      "id": "nano-banana-pro",
+      "name": "Nano Banana Pro",
+      "type": "image",
+      "provider": "Google DeepMind",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Delivers high-fidelity 4K image generation with sharp material detail, stable identity preservation, and consistent lighting across complex scenes. Powered by Gemini 3.0 Pro Image.",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "nano-banana-pro"
+            ],
+            "default": "nano-banana-pro"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 10000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          },
+          "image_input": {
+            "type": "array",
+            "description": "Input images for image-to-image generation",
+            "max_count": 8,
+            "max_size_mb": 30,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output image aspect ratio",
+            "options": [
+              "1:1",
+              "2:3",
+              "3:2",
+              "3:4",
+              "4:3",
+              "4:5",
+              "5:4",
+              "9:16",
+              "16:9",
+              "21:9",
+              "auto"
+            ],
+            "default": "1:1"
+          },
+          "resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K",
+              "4K"
+            ],
+            "default": "1K"
+          },
+          "output_format": {
+            "type": "string",
+            "description": "Output file format",
+            "options": [
+              "png",
+              "jpg"
+            ],
+            "default": "png"
+          }
+        }
+      },
+      "pricing": {
+        "standard": {
+          "credits_per_image": 18,
+          "usd_per_image": 0.09,
+          "resolutions": [
+            "1K",
+            "2K"
+          ]
+        },
+        "pro": {
+          "credits_per_image": 24,
+          "usd_per_image": 0.12,
+          "resolutions": [
+            "4K"
+          ]
+        }
+      },
+      "tier": "standard",
+      "example_request": {
+        "model": "nano-banana-pro",
+        "input": {
+          "prompt": "Comic poster: cool banana hero in shades leaps from sci-fi pad",
+          "aspect_ratio": "1:1",
+          "resolution": "1K",
+          "output_format": "png"
+        }
+      }
+    },
+    {
+      "id": "grok-imagine-text-to-image",
+      "name": "Grok Imagine Text to Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Grok's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "grok-imagine/text-to-image"
+            ],
+            "default": "grok-imagine/text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Image description (English only)",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "2:3",
+              "3:2",
+              "1:1",
+              "16:9",
+              "9:16"
+            ],
+            "default": "1:1"
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "grok-imagine/text-to-image",
+        "input": {
+          "prompt": "Cinematic portrait of a woman sitting by a vinyl record player",
+          "aspect_ratio": "3:2"
+        }
+      }
+    },
+    {
+      "id": "grok-imagine-image-to-image",
+      "name": "Grok Imagine Image to Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Content generation by transforming reference images according to text prompts",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "grok-imagine/image-to-image"
+            ],
+            "default": "grok-imagine/image-to-image"
+          },
+          "image_urls": {
+            "type": "array",
+            "description": "Reference image URL",
+            "max_count": 1,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 390000
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "grok-imagine/image-to-image",
+        "input": {
+          "prompt": "Recreate the Titanic movie poster with anthropomorphic cats",
+          "image_urls": [
+            "https://static.aiquickdraw.com/..."
+          ]
+        }
+      }
+    },
+    {
+      "id": "ideogram-character",
+      "name": "Ideogram Character",
+      "type": "image",
+      "provider": "Ideogram",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Generates images using character references from uploaded portraits",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "ideogram/character"
+            ],
+            "default": "ideogram/character"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Scene description",
+            "max_length": 5000
+          },
+          "reference_image_urls": {
+            "type": "array",
+            "description": "Character reference images",
+            "max_count": 1,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "rendering_speed": {
+            "type": "string",
+            "description": "Processing speed",
+            "options": [
+              "TURBO",
+              "BALANCED",
+              "QUALITY"
+            ],
+            "default": "BALANCED"
+          },
+          "style": {
+            "type": "string",
+            "description": "Output style",
+            "options": [
+              "AUTO",
+              "REALISTIC",
+              "FICTION"
+            ],
+            "default": "AUTO"
+          },
+          "expand_prompt": {
+            "type": "boolean",
+            "description": "Enable MagicPrompt",
+            "default": true
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Number of images",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default": "1"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "square_hd"
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Reproducibility seed"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Exclusion descriptions",
+            "max_length": 5000,
+            "default": ""
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "ideogram/character",
+        "input": {
+          "prompt": "Place woman in garden setting with flowers and bench",
+          "reference_image_urls": [
+            "https://example.com/portrait.webp"
+          ],
+          "rendering_speed": "BALANCED"
+        }
+      }
+    },
+    {
+      "id": "ideogram-character-edit",
+      "name": "Ideogram Character Edit",
+      "type": "image",
+      "provider": "Ideogram",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Character editing and image inpainting with reference-based generation",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "ideogram/character-edit"
+            ],
+            "default": "ideogram/character-edit"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Masked area fill description",
+            "max_length": 5000
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Base image for inpainting",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "mask_url": {
+            "type": "string",
+            "description": "Inpaint mask",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "reference_image_urls": {
+            "type": "array",
+            "description": "Character reference images",
+            "max_count": 1,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          },
+          "rendering_speed": {
+            "type": "string",
+            "description": "Processing speed",
+            "options": [
+              "TURBO",
+              "BALANCED",
+              "QUALITY"
+            ],
+            "default": "BALANCED"
+          },
+          "style": {
+            "type": "string",
+            "description": "Output style",
+            "options": [
+              "AUTO",
+              "REALISTIC",
+              "FICTION"
+            ],
+            "default": "AUTO"
+          },
+          "expand_prompt": {
+            "type": "boolean",
+            "description": "Enable MagicPrompt",
+            "default": true
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Number of images",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default": "1"
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "ideogram/character-edit",
+        "input": {
+          "prompt": "A fabulous look head tilted down, looking forward with a smile",
+          "image_url": "https://file.aiquickdraw.com/...",
+          "mask_url": "https://file.aiquickdraw.com/...",
+          "reference_image_urls": [
+            "https://file.aiquickdraw.com/..."
+          ]
+        }
+      }
+    },
+    {
+      "id": "ideogram-character-remix",
+      "name": "Ideogram Character Remix",
+      "type": "image",
+      "provider": "Ideogram",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Remix images with text prompts and character references",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "ideogram/character-remix"
+            ],
+            "default": "ideogram/character-remix"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text prompt",
+            "max_length": 5000
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Remix base image",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "reference_image_urls": {
+            "type": "array",
+            "description": "Character references",
+            "max_count": 1,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "rendering_speed": {
+            "type": "string",
+            "description": "Processing speed",
+            "options": [
+              "TURBO",
+              "BALANCED",
+              "QUALITY"
+            ],
+            "default": "BALANCED"
+          },
+          "style": {
+            "type": "string",
+            "description": "Output style",
+            "options": [
+              "AUTO",
+              "REALISTIC",
+              "FICTION"
+            ],
+            "default": "AUTO"
+          },
+          "expand_prompt": {
+            "type": "boolean",
+            "description": "Enable MagicPrompt",
+            "default": true
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "square_hd"
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Number of images",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default": "1"
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          },
+          "strength": {
+            "type": "number",
+            "description": "Transformation strength",
+            "min": 0.1,
+            "max": 1.0,
+            "default": 0.8
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Exclusions",
+            "max_length": 500,
+            "default": ""
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "ideogram/character-remix",
+        "input": {
+          "prompt": "Remix this character in a new setting",
+          "image_url": "https://example.com/image.png",
+          "reference_image_urls": [
+            "https://example.com/ref.png"
+          ],
+          "strength": 0.8
+        }
+      }
+    },
+    {
+      "id": "ideogram-v3-reframe",
+      "name": "Ideogram v3 Reframe",
+      "type": "image",
+      "provider": "Ideogram",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Transform existing images by reframing them into new compositions",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "ideogram/v3-reframe"
+            ],
+            "default": "ideogram/v3-reframe"
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Input image URL",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "square_hd"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          },
+          "rendering_speed": {
+            "type": "string",
+            "description": "Processing speed",
+            "options": [
+              "TURBO",
+              "BALANCED",
+              "QUALITY"
+            ],
+            "default": "BALANCED"
+          },
+          "style": {
+            "type": "string",
+            "description": "Output style",
+            "options": [
+              "AUTO",
+              "GENERAL",
+              "REALISTIC",
+              "DESIGN"
+            ],
+            "default": "AUTO"
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Quantity",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            "default": "1"
+          },
+          "seed": {
+            "type": "number",
+            "description": "RNG seed",
+            "default": 0
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "ideogram/v3-reframe",
+        "input": {
+          "image_url": "https://file.aiquickdraw.com/...",
+          "image_size": "square_hd",
+          "rendering_speed": "BALANCED"
+        }
+      }
+    },
+    {
+      "id": "qwen-text-to-image",
+      "name": "Qwen Text to Image",
+      "type": "image",
+      "provider": "Qwen",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Qwen's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPEG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "qwen/text-to-image"
+            ],
+            "default": "qwen/text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Image generation prompt",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook for completion"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "square_hd"
+          },
+          "num_inference_steps": {
+            "type": "number",
+            "description": "Inference step count",
+            "min": 2,
+            "max": 250,
+            "default": 30
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Reproducibility seed"
+          },
+          "guidance_scale": {
+            "type": "number",
+            "description": "CFG adherence strength",
+            "min": 0,
+            "max": 20,
+            "default": 2.5
+          },
+          "enable_safety_checker": {
+            "type": "boolean",
+            "description": "Content safety filtering",
+            "default": true
+          },
+          "output_format": {
+            "type": "string",
+            "description": "Image file format",
+            "options": [
+              "png",
+              "jpeg"
+            ],
+            "default": "png"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Exclusion prompt",
+            "max_length": 500,
+            "default": " "
+          },
+          "acceleration": {
+            "type": "string",
+            "description": "Speed optimization",
+            "options": [
+              "none",
+              "regular",
+              "high"
+            ],
+            "default": "none"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "qwen/text-to-image",
+        "input": {
+          "prompt": "your prompt here",
+          "image_size": "square_hd",
+          "num_inference_steps": 30
+        }
+      }
+    },
+    {
+      "id": "qwen-image-to-image",
+      "name": "Qwen Image to Image",
+      "type": "image",
+      "provider": "Qwen",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by Qwen's advanced AI model that modifies reference images",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPEG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "qwen/image-to-image"
+            ],
+            "default": "qwen/image-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Reference image URL",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "strength": {
+            "type": "number",
+            "description": "Denoising intensity",
+            "min": 0,
+            "max": 1,
+            "default": 0.8
+          },
+          "output_format": {
+            "type": "string",
+            "description": "Output format",
+            "options": [
+              "png",
+              "jpeg"
+            ],
+            "default": "png"
+          },
+          "acceleration": {
+            "type": "string",
+            "description": "Speed vs quality",
+            "options": [
+              "none",
+              "regular",
+              "high"
+            ],
+            "default": "none"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Exclusions",
+            "max_length": 500
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Reproducibility"
+          },
+          "num_inference_steps": {
+            "type": "number",
+            "description": "Processing iterations",
+            "min": 2,
+            "max": 250,
+            "default": 30
+          },
+          "guidance_scale": {
+            "type": "number",
+            "description": "Prompt adherence",
+            "min": 0,
+            "max": 20,
+            "default": 2.5
+          },
+          "enable_safety_checker": {
+            "type": "boolean",
+            "description": "Content filtering",
+            "default": true
+          },
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "qwen/image-to-image",
+        "input": {
+          "prompt": "[your prompt]",
+          "image_url": "[uploaded file URL]",
+          "strength": 0.8
+        }
+      }
+    },
+    {
+      "id": "qwen-image-edit",
+      "name": "Qwen Image Edit",
+      "type": "image",
+      "provider": "Qwen",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image editing capability leveraging qwen/image-edit model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "JPEG",
+          "PNG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "qwen/image-edit"
+            ],
+            "default": "qwen/image-edit"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text direction for editing",
+            "max_length": 2000
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image to edit",
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "acceleration": {
+            "type": "string",
+            "description": "Speed optimization",
+            "options": [
+              "none",
+              "regular",
+              "high"
+            ],
+            "default": "none"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "landscape_4_3"
+          },
+          "num_inference_steps": {
+            "type": "number",
+            "description": "Processing steps",
+            "min": 2,
+            "max": 49,
+            "default": 25
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          },
+          "guidance_scale": {
+            "type": "number",
+            "description": "Prompt adherence",
+            "min": 0,
+            "max": 20,
+            "default": 4
+          },
+          "sync_mode": {
+            "type": "boolean",
+            "description": "Synchronous mode",
+            "default": false
+          },
+          "num_images": {
+            "type": "string",
+            "description": "Number of images",
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "enable_safety_checker": {
+            "type": "boolean",
+            "description": "Content filtering",
+            "default": true
+          },
+          "output_format": {
+            "type": "string",
+            "description": "File format",
+            "options": [
+              "jpeg",
+              "png"
+            ],
+            "default": "png"
+          },
+          "negative_prompt": {
+            "type": "string",
+            "description": "Exclusions",
+            "max_length": 500,
+            "default": ""
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "qwen/image-edit",
+        "input": {
+          "prompt": "professional edit description",
+          "image_url": "https://file.aiquickdraw.com/...",
+          "acceleration": "none"
+        }
+      }
+    },
+    {
+      "id": "seedream-3.0",
+      "name": "Seedream 3.0 Text to Image",
+      "type": "image",
+      "provider": "Bytedance",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by Seedream3.0",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "bytedance/seedream"
+            ],
+            "default": "bytedance/seedream"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_16_9"
+            ],
+            "default": "square_hd"
+          },
+          "guidance_scale": {
+            "type": "number",
+            "description": "Prompt adherence",
+            "min": 1,
+            "max": 10,
+            "default": 2.5
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          },
+          "enable_safety_checker": {
+            "type": "boolean",
+            "description": "Content filtering"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "bytedance/seedream",
+        "input": {
+          "prompt": "A 2D flat art style campsite poster...",
+          "image_size": "square_hd",
+          "guidance_scale": 2.5
+        }
+      }
+    },
+    {
+      "id": "seedream-4.0-text-to-image",
+      "name": "Seedream 4.0 Text to Image",
+      "type": "image",
+      "provider": "Bytedance",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Seedream4.0's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "bytedance/seedream-v4-text-to-image"
+            ],
+            "default": "bytedance/seedream-v4-text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 5000
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_3_2",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_3_2",
+              "landscape_16_9",
+              "landscape_21_9"
+            ],
+            "default": "square_hd"
+          },
+          "image_resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K",
+              "4K"
+            ],
+            "default": "1K"
+          },
+          "max_images": {
+            "type": "number",
+            "description": "Number of images",
+            "min": 1,
+            "max": 6,
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "bytedance/seedream-v4-text-to-image",
+        "input": {
+          "prompt": "Draw the following system of binary linear equations...",
+          "image_size": "square_hd",
+          "image_resolution": "1K"
+        }
+      }
+    },
+    {
+      "id": "seedream-4.0-edit",
+      "name": "Seedream 4.0 Edit",
+      "type": "image",
+      "provider": "Bytedance",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image editing by Seedream4.0",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "bytedance/seedream-v4-edit"
+            ],
+            "default": "bytedance/seedream-v4-edit"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text prompt for editing",
+            "max_length": 5000
+          },
+          "image_urls": {
+            "type": "array",
+            "description": "Image URLs for editing",
+            "max_count": 10,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          },
+          "image_size": {
+            "type": "string",
+            "description": "Output aspect ratio",
+            "options": [
+              "square",
+              "square_hd",
+              "portrait_4_3",
+              "portrait_3_2",
+              "portrait_16_9",
+              "landscape_4_3",
+              "landscape_3_2",
+              "landscape_16_9",
+              "landscape_21_9"
+            ],
+            "default": "square_hd"
+          },
+          "image_resolution": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "1K",
+              "2K",
+              "4K"
+            ],
+            "default": "1K"
+          },
+          "max_images": {
+            "type": "number",
+            "description": "Max images per batch",
+            "min": 1,
+            "max": 6,
+            "default": 1
+          },
+          "seed": {
+            "type": "integer",
+            "description": "Random seed"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "bytedance/seedream-v4-edit",
+        "input": {
+          "prompt": "Refer to this logo and create a visual showcase...",
+          "image_urls": [
+            "https://file.aiquickdraw.com/..."
+          ],
+          "image_size": "square_hd"
+        }
+      }
+    },
+    {
+      "id": "seedream-4.5-text-to-image",
+      "name": "Seedream 4.5 Text to Image",
+      "type": "image",
+      "provider": "Seedream",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "High-quality photorealistic image generation powered by Seedream's advanced AI model",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "seedream/4.5-text-to-image"
+            ],
+            "default": "seedream/4.5-text-to-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 3000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "2:3",
+              "3:2",
+              "21:9"
+            ],
+            "default": "1:1"
+          },
+          "quality": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "basic",
+              "high"
+            ],
+            "default": "basic"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook endpoint"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "seedream/4.5-text-to-image",
+        "input": {
+          "prompt": "A full-process cafe design tool...",
+          "aspect_ratio": "1:1",
+          "quality": "basic"
+        }
+      }
+    },
+    {
+      "id": "seedream-4.5-edit",
+      "name": "Seedream 4.5 Edit",
+      "type": "image",
+      "provider": "Seedream",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image editing capability that modifies existing images based on text prompts",
+      "channel": "fal_request",
+      "supported_formats": {
+        "input_images": [
+          "JPEG",
+          "PNG",
+          "WEBP"
+        ],
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "seedream/4.5-edit"
+            ],
+            "default": "seedream/4.5-edit"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description of edits",
+            "max_length": 3000
+          },
+          "image_urls": {
+            "type": "array",
+            "description": "Input image URLs",
+            "max_count": 14,
+            "max_size_mb": 10,
+            "accepted_formats": [
+              "JPEG",
+              "PNG",
+              "WEBP"
+            ]
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Output dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16",
+              "2:3",
+              "3:2",
+              "21:9"
+            ]
+          },
+          "quality": {
+            "type": "string",
+            "description": "Output resolution",
+            "options": [
+              "basic",
+              "high"
+            ]
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "seedream/4.5-edit",
+        "input": {
+          "prompt": "Change material from silver metal to transparent clear water",
+          "image_urls": [
+            "https://static.aiquickdraw.com/..."
+          ],
+          "aspect_ratio": "1:1",
+          "quality": "basic"
+        }
+      }
+    },
+    {
+      "id": "z-image",
+      "name": "Z-Image",
+      "type": "image",
+      "provider": "kie.ai",
+      "endpoint": "/api/v1/jobs/createTask",
+      "description": "Image generation by z-image",
+      "channel": "fal_request",
+      "supported_formats": {
+        "output": [
+          "PNG",
+          "JPG"
+        ]
+      },
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "description": "Model identifier",
+            "options": [
+              "z-image"
+            ],
+            "default": "z-image"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text description",
+            "max_length": 1000
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "description": "Image dimensions",
+            "options": [
+              "1:1",
+              "4:3",
+              "3:4",
+              "16:9",
+              "9:16"
+            ],
+            "default": "1:1"
+          }
+        },
+        "optional": {
+          "callBackUrl": {
+            "type": "string",
+            "description": "Webhook URL"
+          }
+        }
+      },
+      "pricing": {},
+      "tier": "standard",
+      "example_request": {
+        "model": "z-image",
+        "input": {
+          "prompt": "Photorealistic cafe terrace in Paris spring morning",
+          "aspect_ratio": "1:1"
+        }
+      }
+    }
+  ]
+}

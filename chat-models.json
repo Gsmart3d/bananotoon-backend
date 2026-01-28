@@ -1,0 +1,863 @@
+{
+  "version": "1.0.0",
+  "category": "chat",
+  "total": 5,
+  "models": [
+    {
+      "id": "claude-opus-4-5",
+      "name": "Claude Opus 4.5",
+      "provider": "Anthropic",
+      "type": "chat",
+      "description": "Anthropic's flagship chat model for demanding reasoning and writing tasks",
+      "endpoint": "/claude-opus-4-5/v1/chat/completions",
+      "capabilities": [
+        "multimodal_inputs",
+        "streaming",
+        "tool_calling",
+        "structured_output",
+        "web_access"
+      ],
+      "parameters": {
+        "required": [
+          {
+            "name": "messages",
+            "type": "array",
+            "description": "Message objects with role and content (minimum 1 item)",
+            "schema": {
+              "minItems": 1,
+              "items": {
+                "role": {
+                  "type": "string",
+                  "enum": ["developer", "system", "user", "assistant", "tool"]
+                },
+                "content": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "text"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "image_url"},
+                          "image_url": {
+                            "type": "object",
+                            "properties": {
+                              "url": {"type": "string", "format": "uri"}
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "optional": [
+          {
+            "name": "stream",
+            "type": "boolean",
+            "default": true,
+            "description": "Enable server-sent events for progressive delivery",
+            "options": [true, false]
+          },
+          {
+            "name": "tools",
+            "type": "array",
+            "default": null,
+            "description": "Tool definitions for function calling and Google Search integration",
+            "schema": {
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {"const": "function"},
+                  "function": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "example": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "googleSearch"
+                }
+              }
+            ]
+          },
+          {
+            "name": "reasoning_effort",
+            "type": "string",
+            "default": "high",
+            "description": "Control reasoning depth and quality",
+            "options": ["low", "high"]
+          }
+        ]
+      },
+      "contentTypes": {
+        "input": ["text", "image", "video", "audio", "pdf"],
+        "output": ["json", "stream"]
+      },
+      "messageRoles": [
+        {
+          "name": "developer",
+          "description": "Developer instructions (recommended)",
+          "recommended": true
+        },
+        {
+          "name": "system",
+          "description": "System instructions (deprecated)",
+          "deprecated": true
+        },
+        {
+          "name": "user",
+          "description": "End-user messages"
+        },
+        {
+          "name": "assistant",
+          "description": "Model responses"
+        },
+        {
+          "name": "tool",
+          "description": "Tool results"
+        }
+      ],
+      "formats": {
+        "request": "application/json",
+        "response": ["application/json", "text/event-stream"]
+      },
+      "authentication": "Bearer token",
+      "pricing": {
+        "available": false,
+        "note": "Not specified in documentation"
+      },
+      "example": {
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "What is in this image?"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "https://example.com/image.png"
+                  }
+                }
+              ]
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "googleSearch"
+              }
+            }
+          ],
+          "stream": true,
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "name": "Claude Sonnet 4.5",
+      "provider": "Anthropic",
+      "type": "chat",
+      "description": "High-performance chat model supporting multimodal inputs, streaming, and tool integration",
+      "endpoint": "/claude-sonnet-4-5/v1/chat/completions",
+      "capabilities": [
+        "multimodal_inputs",
+        "streaming",
+        "tool_calling",
+        "reasoning",
+        "web_access"
+      ],
+      "parameters": {
+        "required": [
+          {
+            "name": "messages",
+            "type": "array",
+            "description": "Message objects with role and content; minimum 1 item",
+            "schema": {
+              "minItems": 1,
+              "items": {
+                "role": {
+                  "type": "string",
+                  "enum": ["developer", "system", "user", "assistant", "tool"]
+                },
+                "content": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "text"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "image_url"},
+                          "image_url": {
+                            "type": "object",
+                            "properties": {
+                              "url": {"type": "string", "format": "uri"}
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "optional": [
+          {
+            "name": "stream",
+            "type": "boolean",
+            "default": true,
+            "description": "Enable server-sent events for progressive delivery",
+            "options": [true, false]
+          },
+          {
+            "name": "tools",
+            "type": "array",
+            "default": null,
+            "description": "Web Access via Google Search",
+            "schema": {
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {"const": "function"},
+                  "function": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "example": [
+              {
+                "type": "function",
+                "function": {
+                  "name": "googleSearch"
+                }
+              }
+            ]
+          },
+          {
+            "name": "include_thoughts",
+            "type": "boolean",
+            "default": true,
+            "description": "Enable internal model reasoning",
+            "options": [true, false]
+          },
+          {
+            "name": "reasoning_effort",
+            "type": "string",
+            "default": "high",
+            "description": "Control reasoning depth",
+            "options": ["low", "high"]
+          }
+        ]
+      },
+      "contentTypes": {
+        "input": ["text", "image", "video", "audio", "pdf", "document"],
+        "output": ["json", "stream"]
+      },
+      "messageRoles": [
+        {
+          "name": "developer",
+          "description": "Developer instructions"
+        },
+        {
+          "name": "system",
+          "description": "System instructions"
+        },
+        {
+          "name": "user",
+          "description": "End-user messages"
+        },
+        {
+          "name": "assistant",
+          "description": "Model responses"
+        },
+        {
+          "name": "tool",
+          "description": "Tool results"
+        }
+      ],
+      "formats": {
+        "request": "application/json",
+        "response": ["application/json", "text/event-stream"]
+      },
+      "authentication": "Bearer token",
+      "pricing": {
+        "available": false,
+        "note": "Not specified in documentation"
+      },
+      "example": {
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "What is in this image?"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "https://example.com/image.png"
+                  }
+                }
+              ]
+            }
+          ],
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "googleSearch"
+              }
+            }
+          ],
+          "stream": true,
+          "include_thoughts": true,
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "id": "gemini-2.5-flash",
+      "name": "Gemini 2.5 Flash",
+      "provider": "Google DeepMind",
+      "type": "chat",
+      "description": "First hybrid reasoning LLM developed by Google DeepMind, built for developers to combine fast generation with optional reasoning",
+      "endpoint": "/gemini-2.5-flash/v1/chat/completions",
+      "capabilities": [
+        "multimodal_inputs",
+        "streaming",
+        "reasoning",
+        "web_access",
+        "function_calling",
+        "structured_output"
+      ],
+      "parameters": {
+        "required": [
+          {
+            "name": "messages",
+            "type": "array",
+            "description": "Message objects with role and content (min 1 item)",
+            "schema": {
+              "minItems": 1,
+              "items": {
+                "role": {
+                  "type": "string",
+                  "enum": ["developer", "system", "user", "assistant", "tool"]
+                },
+                "content": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "text"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "image_url"},
+                          "image_url": {
+                            "type": "object",
+                            "properties": {
+                              "url": {"type": "string", "format": "uri"}
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "optional": [
+          {
+            "name": "stream",
+            "type": "boolean",
+            "default": true,
+            "description": "Enable server-sent event streaming",
+            "options": [true, false]
+          },
+          {
+            "name": "tools",
+            "type": "array",
+            "default": null,
+            "description": "Tool definitions (Google Search or custom functions)",
+            "constraints": "Mutually exclusive with response_format",
+            "schema": {
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {"const": "function"},
+                  "function": {
+                    "type": "object",
+                    "properties": {
+                      "name": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "name": "include_thoughts",
+            "type": "boolean",
+            "default": true,
+            "description": "Include reasoning thoughts in response",
+            "options": [true, false]
+          },
+          {
+            "name": "response_format",
+            "type": "object",
+            "default": null,
+            "description": "JSON Schema for structured output",
+            "constraints": "Mutually exclusive with tools (function calling)"
+          }
+        ]
+      },
+      "contentTypes": {
+        "input": ["text", "image", "video", "audio", "pdf"],
+        "output": ["json", "structured_json", "stream"]
+      },
+      "messageRoles": [
+        {
+          "name": "developer",
+          "description": "Developer instructions (recommended for instructions)",
+          "recommended": true
+        },
+        {
+          "name": "system",
+          "description": "System instructions (deprecated)",
+          "deprecated": true
+        },
+        {
+          "name": "user",
+          "description": "End-user messages"
+        },
+        {
+          "name": "assistant",
+          "description": "Model responses"
+        },
+        {
+          "name": "tool",
+          "description": "Tool results"
+        }
+      ],
+      "formats": {
+        "request": "application/json",
+        "response": ["application/json", "text/event-stream"]
+      },
+      "constraints": [
+        "Google Search and function calling are mutually exclusive",
+        "Function calling and response_format are mutually exclusive"
+      ],
+      "authentication": "Bearer token",
+      "pricing": {
+        "available": false,
+        "note": "Not specified in documentation"
+      },
+      "example": {
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "What is in this image?"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "https://..."
+                  }
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "include_thoughts": true,
+          "tools": [
+            {
+              "type": "function",
+              "function": {
+                "name": "googleSearch"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gemini-2.5-pro",
+      "name": "Gemini 2.5 Pro",
+      "provider": "Google",
+      "type": "chat",
+      "description": "Google's advanced thinking model designed for complex reasoning, code generation and long-context understanding",
+      "endpoint": "/gemini-2.5-pro/v1/chat/completions",
+      "capabilities": [
+        "multimodal_inputs",
+        "streaming",
+        "reasoning",
+        "web_access",
+        "function_calling",
+        "structured_output",
+        "long_context"
+      ],
+      "contextWindow": {
+        "tokens": 1000000,
+        "note": "Up to 1 million token context window"
+      },
+      "parameters": {
+        "required": [
+          {
+            "name": "messages",
+            "type": "array",
+            "description": "Message objects with role and content; minimum 1 item required",
+            "schema": {
+              "minItems": 1,
+              "items": {
+                "role": {
+                  "type": "string",
+                  "enum": ["developer", "system", "user", "assistant", "tool"]
+                },
+                "content": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "text"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "image_url"},
+                          "image_url": {
+                            "type": "object",
+                            "properties": {
+                              "url": {"type": "string", "format": "uri"}
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "optional": [
+          {
+            "name": "stream",
+            "type": "boolean",
+            "default": true,
+            "description": "Enables server-sent events for progressive delivery",
+            "options": [true, false]
+          },
+          {
+            "name": "tools",
+            "type": "array",
+            "default": null,
+            "description": "Google Search or custom function definitions",
+            "constraints": "Mutually exclusive with response_format"
+          },
+          {
+            "name": "include_thoughts",
+            "type": "boolean",
+            "default": true,
+            "description": "Includes reasoning thoughts in response",
+            "options": [true, false]
+          },
+          {
+            "name": "reasoning_effort",
+            "type": "string",
+            "default": "high",
+            "description": "Control reasoning depth and quality",
+            "options": ["low", "high"]
+          },
+          {
+            "name": "response_format",
+            "type": "object",
+            "default": null,
+            "description": "JSON Schema for structured output",
+            "constraints": "Mutually exclusive with tools (function calling)"
+          }
+        ]
+      },
+      "contentTypes": {
+        "input": ["text", "image", "video", "audio", "pdf", "document"],
+        "output": ["json", "structured_json", "stream"]
+      },
+      "messageRoles": [
+        {
+          "name": "developer",
+          "description": "Developer instructions (recommended for system instructions)",
+          "recommended": true
+        },
+        {
+          "name": "system",
+          "description": "System instructions (deprecated)",
+          "deprecated": true
+        },
+        {
+          "name": "user",
+          "description": "End-user messages"
+        },
+        {
+          "name": "assistant",
+          "description": "Model responses"
+        },
+        {
+          "name": "tool",
+          "description": "Tool results"
+        }
+      ],
+      "formats": {
+        "request": "application/json",
+        "response": ["application/json", "text/event-stream"]
+      },
+      "constraints": [
+        "Google Search and function calling are mutually exclusive",
+        "Function calling and response_format are mutually exclusive"
+      ],
+      "authentication": "Bearer token",
+      "pricing": {
+        "available": false,
+        "note": "Not specified in documentation"
+      },
+      "example": {
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "What is in this image?"
+                },
+                {
+                  "type": "image_url",
+                  "image_url": {
+                    "url": "https://example.com/image.png"
+                  }
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "include_thoughts": true,
+          "reasoning_effort": "high"
+        }
+      }
+    },
+    {
+      "id": "gemini-3-pro",
+      "name": "Gemini 3 Pro",
+      "provider": "Google DeepMind",
+      "type": "chat",
+      "description": "Next-generation multimodal model featuring exceptional reasoning capabilities with support for large-scale long-context processing and real-time search grounding",
+      "endpoint": "/gemini-3-pro/v1/chat/completions",
+      "capabilities": [
+        "multimodal_inputs",
+        "streaming",
+        "reasoning",
+        "web_access",
+        "function_calling",
+        "structured_output",
+        "long_context"
+      ],
+      "parameters": {
+        "required": [
+          {
+            "name": "messages",
+            "type": "array",
+            "description": "Minimum 1 item; array of message objects with role and content",
+            "schema": {
+              "minItems": 1,
+              "items": {
+                "role": {
+                  "type": "string",
+                  "enum": ["developer", "system", "user", "assistant", "tool"]
+                },
+                "content": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "text"},
+                          "text": {"type": "string"}
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "type": {"const": "image_url"},
+                          "image_url": {
+                            "type": "object",
+                            "properties": {
+                              "url": {"type": "string", "format": "uri"}
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "optional": [
+          {
+            "name": "stream",
+            "type": "boolean",
+            "default": true,
+            "description": "Enables server-sent events for progressive delivery",
+            "options": [true, false]
+          },
+          {
+            "name": "tools",
+            "type": "array",
+            "default": null,
+            "description": "Can include Google Search or custom functions",
+            "constraints": "Mutually exclusive with response_format"
+          },
+          {
+            "name": "include_thoughts",
+            "type": "boolean",
+            "default": true,
+            "description": "Controls whether reasoning thoughts appear in response",
+            "options": [true, false]
+          },
+          {
+            "name": "reasoning_effort",
+            "type": "string",
+            "default": "high",
+            "description": "Control reasoning complexity",
+            "options": ["low", "high"],
+            "notes": {
+              "low": "faster",
+              "high": "complex reasoning"
+            }
+          },
+          {
+            "name": "response_format",
+            "type": "object",
+            "default": null,
+            "description": "Defines output structure using JSON Schema",
+            "constraints": "Mutually exclusive with function calling"
+          }
+        ]
+      },
+      "contentTypes": {
+        "input": ["text", "image", "video", "audio", "document"],
+        "output": ["json", "structured_json", "stream"]
+      },
+      "messageRoles": [
+        {
+          "name": "developer",
+          "description": "Developer instructions (recommended for system instructions)",
+          "recommended": true
+        },
+        {
+          "name": "system",
+          "description": "System instructions (deprecated)",
+          "deprecated": true
+        },
+        {
+          "name": "user",
+          "description": "End-user messages"
+        },
+        {
+          "name": "assistant",
+          "description": "Model responses"
+        },
+        {
+          "name": "tool",
+          "description": "Tool results"
+        }
+      ],
+      "features": [
+        "Multimodal input support",
+        "Streaming via server-sent events",
+        "Google Search grounding (real-time retrieval)",
+        "Function calling with custom tools",
+        "JSON Schema response formatting"
+      ],
+      "formats": {
+        "request": "application/json",
+        "response": ["application/json", "text/event-stream"]
+      },
+      "authentication": "Bearer token",
+      "pricing": {
+        "available": false,
+        "note": "Not specified in documentation"
+      },
+      "example": {
+        "request": {
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Analyze this complex problem"
+                }
+              ]
+            }
+          ],
+          "stream": true,
+          "include_thoughts": true,
+          "reasoning_effort": "high"
+        }
+      }
+    }
+  ]
+}
