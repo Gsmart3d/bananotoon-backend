@@ -79,6 +79,16 @@ module.exports = async (req, res) => {
 
   const { userId, modelId, parameters, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro, duration, resolution } = req.body;
 
+  // DEBUG: Log received data
+  console.log('=== REQUEST RECEIVED ===');
+  console.log('userId:', userId);
+  console.log('modelId:', modelId);
+  console.log('parameters:', parameters);
+  console.log('style:', style);
+  console.log('Has modelId?', !!modelId);
+  console.log('Has parameters?', !!parameters);
+  console.log('========================');
+
   // === DYNAMIC MODEL MODE (NEW: 106+ models support) ===
   if (modelId && parameters) {
     try {
