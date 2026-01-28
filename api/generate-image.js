@@ -3,6 +3,9 @@
  * Génère une image depuis un prompt avec API KIE.AI
  * ALSO supports dynamic models (106+ models) via modelId + parameters
  * Endpoint: /api/generate-image
+ *
+ * VERSION: 2.0.0 - DYNAMIC MODELS SUPPORT
+ * Last updated: 2026-01-28
  */
 const { getFirestore, admin } = require('./_firebase');
 const fs = require('fs');
@@ -70,6 +73,8 @@ const STYLE_PROMPTS = {
 };
 
 module.exports = async (req, res) => {
+  console.log('🚀 GENERATE-IMAGE.JS v2.0.0 - DYNAMIC MODELS LOADED');
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -80,7 +85,7 @@ module.exports = async (req, res) => {
   const { userId, modelId, parameters, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro, duration, resolution } = req.body;
 
   // DEBUG: Log received data
-  console.log('=== REQUEST RECEIVED ===');
+  console.log('=== REQUEST RECEIVED v2.0 ===');
   console.log('userId:', userId);
   console.log('modelId:', modelId);
   console.log('parameters:', parameters);
