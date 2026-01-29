@@ -1,0 +1,4360 @@
+{
+  "version": "2.0.0",
+  "extracted_date": "2026-01-29 14:11:37",
+  "description": "Complete mapping of KIE API endpoints with real parameters extracted from HTML documentation",
+  "total_endpoints": 146,
+  "categories": {
+    "other": 10,
+    "audio": 35,
+    "video": 58,
+    "image": 38,
+    "chat": 5
+  },
+  "most_common_parameters": {
+    "model": 81,
+    "input": 74,
+    "aspect_ratio": 26,
+    "resolution": 22,
+    "duration": 22,
+    "image_url": 21,
+    "prompt": 20,
+    "negative_prompt": 14,
+    "taskId": 12,
+    "style": 8,
+    "seed": 7,
+    "text": 6,
+    "cfg_scale": 6,
+    "messages": 5,
+    "stream": 5,
+    "num_images": 4,
+    "quality": 4,
+    "guidance_scale": 4,
+    "audio_url": 4,
+    "waterMark": 3
+  },
+  "endpoints": [
+    {
+      "name": "Market",
+      "category": "other",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": 50
+      }
+    },
+    {
+      "name": "Add Vocals",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/add-vocals",
+      "full_url": "https://api.kie.ai/api/v1/generate/add-vocals",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A calm and relaxing piano track.",
+            "description": ""
+          },
+          "model": {
+            "type": "string",
+            "example": "V4_5PLUS",
+            "description": ""
+          }
+        },
+        "optional": {
+          "style": {
+            "type": "string",
+            "example": "Jazz",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Music Cover",
+      "category": "audio",
+      "endpoint": "/api/v1/suno/cover/generate",
+      "full_url": "https://api.kie.ai/api/v1/suno/cover/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "73d6128b3523a0079df10da9471017c8",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Timestamped Lyrics",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/get-timestamped-lyrics",
+      "full_url": "https://api.kie.ai/api/v1/generate/get-timestamped-lyrics",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "5c79****be8e",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Vocal Separation Details",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Persona",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/generate-persona",
+      "full_url": "https://api.kie.ai/api/v1/generate/generate-persona",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "5c79****be8e",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "MIDI Generation Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Convert to WAV Format",
+      "category": "audio",
+      "endpoint": "/api/v1/wav/generate",
+      "full_url": "https://api.kie.ai/api/v1/wav/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "5c79****be8e",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Boost Music Style",
+      "category": "audio",
+      "endpoint": "/api/v1/style/generate",
+      "full_url": "https://api.kie.ai/api/v1/style/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get WAV Conversion Details",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Music Cover Details",
+      "category": "audio",
+      "endpoint": "/api/v1/suno/cover/record-info",
+      "full_url": "https://api.kie.ai/api/v1/suno/cover/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Music Extension Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get MIDI Generation Details",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Create Music Video",
+      "category": "audio",
+      "endpoint": "/api/v1/mp4/generate",
+      "full_url": "https://api.kie.ai/api/v1/mp4/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "taskId_774b9aa0422f",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Upload And Extend Audio",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/upload-extend",
+      "full_url": "https://api.kie.ai/api/v1/generate/upload-extend",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "V4",
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Extend the music with more relaxing notes",
+            "description": ""
+          }
+        },
+        "optional": {
+          "instrumental": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          },
+          "style": {
+            "type": "string",
+            "example": "Classical",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Music Task Details",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/record-info",
+      "full_url": "https://api.kie.ai/api/v1/generate/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Vocal &amp; Instrument Stem Separation",
+      "category": "audio",
+      "endpoint": "/api/v1/vocal-removal/generate",
+      "full_url": "https://api.kie.ai/api/v1/vocal-removal/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "5c79****be8e",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate MIDI from Audio",
+      "category": "audio",
+      "endpoint": "/api/v1/midi/generate",
+      "full_url": "https://api.kie.ai/api/v1/midi/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "5c79****be8e",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Replace Music Section Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Audio Upload and Extension Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Add Instrumental Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Lyrics Task Details",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Add Instrumental",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/add-instrumental",
+      "full_url": "https://api.kie.ai/api/v1/generate/add-instrumental",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "V4_5PLUS",
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Audio Separation Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Music Generation Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Lyrics",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A nostalgic song about childhood memories and growing up in a small town",
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Extend Music",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/extend",
+      "full_url": "https://api.kie.ai/api/v1/generate/extend",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "Extend the music with more relaxing notes and a gentle bridge section",
+            "description": ""
+          },
+          "model": {
+            "type": "string",
+            "example": "V4",
+            "description": ""
+          }
+        },
+        "optional": {
+          "style": {
+            "type": "string",
+            "example": "Classical",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Music Video Generation Callbacks",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Music Video Details",
+      "category": "audio",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Replace Music Section",
+      "category": "audio",
+      "endpoint": "/api/v1/generate/replace-section",
+      "full_url": "https://api.kie.ai/api/v1/generate/replace-section",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A calm and relaxing piano track.",
+            "description": ""
+          }
+        },
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "2fac****9f72",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Common API Quickstart",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Download URL for Generated Files",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "url": {
+            "type": "string",
+            "example": "https://tempfile.1f6cxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxbd98\"</span></span>\n<span class=\"line\"><span styl",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Remaining Credits",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get 4K Video",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "veo_task_abcdef123456",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Veo 3.1 AI Video(Fast&amp;Quality)",
+      "category": "video",
+      "endpoint": "/api/v1/veo/generate",
+      "full_url": "https://api.kie.ai/api/v1/veo/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Veo3.1 Video Details",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get 1080P Video",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get 4K Video Callbacks",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Extend Veo 3.1 AI Video",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [
+        "fast\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">"
+      ],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "The dog continues running through the park",
+            "description": ""
+          },
+          "model": {
+            "type": "string",
+            "example": "fast\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        },
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "veo_task_abcdef123456",
+            "description": ""
+          },
+          "watermark": {
+            "type": "string",
+            "example": "MyBrand",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "File Stream Upload",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Base64 File Upload",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "File Upload API Quickstart",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "URL File Upload",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Task Details",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Getting Started with  (Important)",
+      "category": "other",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "AI Video Generation Callbacks",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "AI Video Extension Callbacks",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate AI Video",
+      "category": "video",
+      "endpoint": "/api/v1/runway/generate",
+      "full_url": "https://api.kie.ai/api/v1/runway/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A fluffy orange cat dancing energetically in a colorful room with disco lights",
+            "description": ""
+          },
+          "model": {
+            "type": "string",
+            "example": "runway-duration-5-generate",
+            "description": ""
+          }
+        },
+        "optional": {
+          "waterMark": {
+            "type": "string",
+            "example": "kie.ai",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Aleph Video Details",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Extend AI Video",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "The cat continues dancing with more energy and excitement",
+            "description": ""
+          }
+        },
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "ee603959-debb-48d1-98c4-a6d1c717eba6",
+            "description": ""
+          },
+          "waterMark": {
+            "type": "string",
+            "example": "kie.ai",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Aleph Video",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/generate",
+      "full_url": "https://api.kie.ai/api/v1/aleph/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A majestic eagle soaring through mountain clouds at sunset with cinematic camera movement",
+            "description": ""
+          }
+        },
+        "optional": {
+          "waterMark": {
+            "type": "string",
+            "example": "kie.ai",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get AI Video Details",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Aleph Video Generation Callbacks",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Image Details",
+      "category": "image",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate or Edit Image",
+      "category": "image",
+      "endpoint": "/api/v1/flux/kontext/generate",
+      "full_url": "https://api.kie.ai/api/v1/flux/kontext/generate",
+      "method": "POST",
+      "modelIds": [
+        "flux-kontext-pro\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">"
+      ],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A serene mountain landscape at sunset with a lake reflecting the orange sky",
+            "description": ""
+          },
+          "model": {
+            "type": "string",
+            "example": "flux-kontext-pro\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspectRatio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Image Generation or Editing Callbacks",
+      "category": "image",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Luma Modify Video Callbacks",
+      "category": "video",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate Luma Modify Video",
+      "category": "video",
+      "endpoint": "/api/v1/modify/generate",
+      "full_url": "https://api.kie.ai/api/v1/modify/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A futuristic cityscape at night with towering glass spires reaching into a starry sky",
+            "description": ""
+          }
+        },
+        "optional": {
+          "watermark": {
+            "type": "string",
+            "example": "your-watermark-id\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\"",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "4o Image Generation Callbacks",
+      "category": "image",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get 4o Image Details",
+      "category": "image",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "GET",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Generate 4o Image（GPT IMAG 1）",
+      "category": "image",
+      "endpoint": "/api/v1/gpt4o-image/generate",
+      "full_url": "https://api.kie.ai/api/v1/gpt4o-image/generate",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "prompt": {
+            "type": "string",
+            "example": "A beautiful sunset over the mountains",
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Get Direct Download URL",
+      "category": "image",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {
+          "taskId": {
+            "type": "string",
+            "example": "task12345",
+            "description": ""
+          },
+          "url": {
+            "type": "string",
+            "example": "https://tempfile.aiquickdraw.com/v/xxxxxxx.png\"</span></span>\n<span class=\"line\"><span style=\"color:",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - Nano Banana Pro",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "nano-banana-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1K",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - imagen4-fast",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "google/imagen4-fast"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "google/imagen4-fast",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "negative_prompt": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "num_images": {
+            "type": "string",
+            "example": "1\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - Nano Banana",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "google/nano-banana"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "google/nano-banana",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - imagen4-ultra",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "google/imagen4-ultra"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "google/imagen4-ultra",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "negative_prompt": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "seed": {
+            "type": "string",
+            "example": "</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - imagen4",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "google/imagen4"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "google/imagen4",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "negative_prompt": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "seed": {
+            "type": "string",
+            "example": "</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Google - Nano Banana Edit",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "google/nano-banana-edit"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "google/nano-banana-edit",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "recraft/remove-background",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "recraft/remove-background"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "recraft/remove-background",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Recraft - Image Upscale",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "recraft/crisp-upscale"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "recraft/crisp-upscale",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Seedream4.5 - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "seedream/4.5-text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "seedream/4.5-text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "quality": {
+            "type": "string",
+            "example": "basic\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Seedream4.0 - Edit",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/seedream-v4-edit"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/seedream-v4-edit",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Seedream4.5 - Edit",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "seedream/4.5-edit"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "seedream/4.5-edit",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "quality": {
+            "type": "string",
+            "example": "basic\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Seedream4.0 - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/seedream-v4-text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/seedream-v4-text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Seedream3.0 - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/seedream"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/seedream",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "guidance_scale": {
+            "type": "number",
+            "example": 2.5,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "GPT Image 1.5 Image To Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "gpt-image/1.5-image-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "gpt-image/1.5-image-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Edit the image to dress the woman using the provided clothing images. Preserve her exact likeness",
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "3:2",
+            "description": ""
+          },
+          "quality": {
+            "type": "string",
+            "example": "medium\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "GPT Image 1.5 Text To Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "gpt-image/1.5-text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "gpt-image/1.5-text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "quality": {
+            "type": "string",
+            "example": "medium\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "grok-imagine/image-to-image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "grok-imagine/image-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "grok-imagine/image-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Grok Imagine - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "grok-imagine/text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "grok-imagine/text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "3:2\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Grok Imagine - Image Upscale",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "grok-imagine/upscale"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "grok-imagine/upscale",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Ideogram - character",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "ideogram/character"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "ideogram/character",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "style": {
+            "type": "string",
+            "example": "AUTO",
+            "description": ""
+          },
+          "num_images": {
+            "type": "number",
+            "example": 1,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Ideogram - v3-reframe",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Ideogram - character-edit",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "ideogram/character-edit"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "ideogram/character-edit",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17557680349256sa0lk53.webp",
+            "description": ""
+          },
+          "style": {
+            "type": "string",
+            "example": "AUTO",
+            "description": ""
+          },
+          "num_images": {
+            "type": "string",
+            "example": "1\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Ideogram - character-remix",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "ideogram/character-remix"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "ideogram/character-remix",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1755768466167d0tiuc6e.webp",
+            "description": ""
+          },
+          "style": {
+            "type": "string",
+            "example": "AUTO",
+            "description": ""
+          },
+          "num_images": {
+            "type": "number",
+            "example": 1,
+            "description": ""
+          },
+          "strength": {
+            "type": "number",
+            "example": 0.8,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Qwen - image-edit",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "qwen/image-edit"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "qwen/image-edit",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1755603225969i6j87xnw.jpg",
+            "description": ""
+          },
+          "guidance_scale": {
+            "type": "number",
+            "example": 4,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blurry",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Qwen - Image to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Qwen - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "qwen/text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "qwen/text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "guidance_scale": {
+            "type": "number",
+            "example": 2.5,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": " ",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Topaz - Image Upscale",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "topaz/image-upscale"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "topaz/image-upscale",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "upscale_factor": {
+            "type": "string",
+            "example": "2\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Flux-2 - Pro Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "flux-2/pro-text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "flux-2/pro-text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1K\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Flux-2 - Image to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "flux-2/flex-image-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "flux-2/flex-image-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Replace the can in image 2 with the can from image 1",
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1K\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Flux-2 - Text to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "flux-2/flex-text-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "flux-2/flex-text-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1K\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Flux-2 - Pro Image to Image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "flux-2/pro-image-to-image"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "flux-2/pro-image-to-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "The jar in image 1 is filled with capsules exactly same as image 2 with the exact logo",
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1K\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "z-image",
+      "category": "image",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "z-image",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/text-to-speech-turbo-2-5",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/text-to-speech-turbo-2-5"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/text-to-speech-turbo-2-5",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "voice": {
+            "type": "string",
+            "example": "Rachel",
+            "description": ""
+          },
+          "style": {
+            "type": "number",
+            "example": 0,
+            "description": ""
+          },
+          "speed": {
+            "type": "number",
+            "example": 1,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/speech-to-text",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/speech-to-text"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/speech-to-text",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/sound-effect-v2",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/sound-effect-v2"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/sound-effect-v2",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "loop": {
+            "type": "boolean",
+            "example": false,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/text-to-dialogue-v3",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/text-to-dialogue-v3"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/text-to-dialogue-v3",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "text": {
+            "type": "string",
+            "example": "a happy dog",
+            "description": ""
+          }
+        },
+        "optional": {
+          "voice": {
+            "type": "string",
+            "example": "Adam\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/audio-isolation",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/audio-isolation"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/audio-isolation",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "elevenlabs/text-to-speech-multilingual-v2",
+      "category": "audio",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "elevenlabs/text-to-speech-multilingual-v2"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "elevenlabs/text-to-speech-multilingual-v2",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "voice": {
+            "type": "string",
+            "example": "Rachel",
+            "description": ""
+          },
+          "style": {
+            "type": "number",
+            "example": 0,
+            "description": ""
+          },
+          "speed": {
+            "type": "number",
+            "example": 1,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Gemini 2.5 Flash",
+      "category": "chat",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "text": {
+            "type": "string",
+            "example": "What is in this image?\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE",
+            "description": ""
+          }
+        },
+        "optional": {
+          "messages": {
+            "type": "array",
+            "example": null,
+            "description": ""
+          },
+          "image_url": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "stream": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Gemini 2.5 Pro",
+      "category": "chat",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "text": {
+            "type": "string",
+            "example": "What is in this image?\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE",
+            "description": ""
+          }
+        },
+        "optional": {
+          "messages": {
+            "type": "array",
+            "example": null,
+            "description": ""
+          },
+          "image_url": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "stream": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Gemini 3 Pro",
+      "category": "chat",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "text": {
+            "type": "string",
+            "example": "What is in this image?\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE",
+            "description": ""
+          }
+        },
+        "optional": {
+          "messages": {
+            "type": "array",
+            "example": null,
+            "description": ""
+          },
+          "image_url": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "stream": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Claude Sonnet 4.5",
+      "category": "chat",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "text": {
+            "type": "string",
+            "example": "What is in this image?\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE",
+            "description": ""
+          }
+        },
+        "optional": {
+          "messages": {
+            "type": "array",
+            "example": null,
+            "description": ""
+          },
+          "image_url": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "stream": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Claude Opus 4.5",
+      "category": "chat",
+      "endpoint": "/api/v1/aleph/record-info",
+      "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "text": {
+            "type": "string",
+            "example": "What is in this image?\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE",
+            "description": ""
+          }
+        },
+        "optional": {
+          "messages": {
+            "type": "array",
+            "example": null,
+            "description": ""
+          },
+          "image_url": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "stream": {
+            "type": "boolean",
+            "example": true,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo Standard - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "hailuo/02-text-to-video-standard"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "hailuo/02-text-to-video-standard",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 6,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo Pro - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "hailuo/02-image-to-video-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "hailuo/02-image-to-video-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17585210783150ispzfo7.png",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo Standard - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "hailuo/02-image-to-video-standard"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "hailuo/02-image-to-video-standard",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17585207681646umf3lz8.png",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 10,
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "768P",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "hailuo/2-3-image-to-video-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "hailuo/2-3-image-to-video-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1761736831884xl56xfiw.webp",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 6,
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "768P\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Hailuo Pro - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - AI Avatar Pro",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/ai-avatar-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/ai-avatar-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        },
+        "optional": {
+          "audio_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1757925802302srqfkcqh.mp3",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - AI Avatar Standard",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/ai-avatar-standard"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/ai-avatar-standard",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        },
+        "optional": {
+          "audio_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17579258340109gghun47.mp3",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "kling-2.6/motion-control",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling-2.6/motion-control"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling-2.6/motion-control",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.1 Master Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-1-master-image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-1-master-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1755256297923kmjpynul.png",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "string",
+            "example": "0.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling-2.6 - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {},
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.1 Master Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-1-master-text-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-1-master-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "string",
+            "example": "0.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.1 Standard",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-1-standard"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-1-standard",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1755256596169mkkwr2ag.webp",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "string",
+            "example": "0.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.5 Turbo Text to Video Pro",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-5-turbo-text-to-video-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-5-turbo-text-to-video-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "string",
+            "example": "0.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.1 Pro",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-1-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-1-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1754892534386c8wt0qfs.webp",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "number",
+            "example": 0.5,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling-2.6 - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling-2.6/image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling-2.6/image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "string",
+            "example": "5\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Kling - V2.5 Turbo Image to Video Pro",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "kling/v2-5-turbo-image-to-video-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "kling/v2-5-turbo-image-to-video-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1759211376283gfcw5zcy.png",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "blur",
+            "description": ""
+          },
+          "cfg_scale": {
+            "type": "string",
+            "example": "0.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Grok Imagine - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "grok-imagine/text-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "grok-imagine/text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "2:3",
+            "description": ""
+          },
+          "duration": {
+            "type": "string",
+            "example": "6\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Grok Imagine - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "grok-imagine/image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "grok-imagine/image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "POV hand comes into frame handing the girl a cup of take away coffee",
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "string",
+            "example": "6\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Pro Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-pro-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "landscape",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Characters",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-characters",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "character_prompt": {
+            "type": "string",
+            "example": "A friendly cartoon character with expressive eyes and fluid movements",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "sora-2-pro-storyboard",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-pro-storyboard",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "landscape",
+            "description": ""
+          },
+          "duration": {
+            "type": "string",
+            "example": "7.5</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Watermark Remover",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-watermark-remover",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {}
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "landscape",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "landscape",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Sora2 - Pro Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "sora-2-pro-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "landscape",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - V1 Lite Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/v1-lite-image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/v1-lite-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17550783375205e9woshz.png",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "seed": {
+            "type": "string",
+            "example": "-1",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - V1 Pro Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/v1-pro-image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/v1-pro-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1755179021328w1nhip18.webp",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "seed": {
+            "type": "string",
+            "example": "-1",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - V1 Pro Fast Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/v1-pro-fast-image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/v1-pro-fast-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1762340693669m6sey187.webp",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "string",
+            "example": "5\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - Seedance 1.5 Pro",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/seedance-1.5-pro"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/seedance-1.5-pro",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "1:1",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 8,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - V1 Pro Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/v1-pro-text-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/v1-pro-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "seed": {
+            "type": "string",
+            "example": "-1",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Bytedance - V1 Lite Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "bytedance/v1-lite-text-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "bytedance/v1-lite-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Topaz - Video Upscale",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "topaz/video-upscale"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "topaz/video-upscale",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "upscale_factor": {
+            "type": "string",
+            "example": "2\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan 2.6 - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-6-text-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-6-text-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1080p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan - Animate Replace",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-2-animate-replace"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-2-animate-replace",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17586199255323tks43kq.png",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "480p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-2-a14b-image-to-video-turbo"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-2-a14b-image-to-video-turbo",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Overcast lighting",
+            "description": ""
+          }
+        },
+        "optional": {
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "seed": {
+            "type": "number",
+            "example": 0,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan - Animate Move",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-2-animate-move"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-2-animate-move",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1758625466310wpehpbnf.png",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "480p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan - 2.2 A14B Speech to Video Turbo",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-2-a14b-speech-to-video-turbo"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-2-a14b-speech-to-video-turbo",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "image_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1756797663082u4pjmcrq.png",
+            "description": ""
+          },
+          "audio_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/17567977044127d1emlmc.mp3",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "480p",
+            "description": ""
+          },
+          "negative_prompt": {
+            "type": "string",
+            "example": "",
+            "description": ""
+          },
+          "guidance_scale": {
+            "type": "number",
+            "example": 3.5,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan 2.6 - Image to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-6-image-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-6-image-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1080p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan - Text to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-2-a14b-text-to-video-turbo"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-2-a14b-text-to-video-turbo",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "resolution": {
+            "type": "string",
+            "example": "720p",
+            "description": ""
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "example": "16:9",
+            "description": ""
+          },
+          "seed": {
+            "type": "number",
+            "example": 0,
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Wan 2.6 - Video to Video",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "wan/2-6-video-to-video"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "wan/2-6-video-to-video",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          }
+        },
+        "optional": {
+          "duration": {
+            "type": "number",
+            "example": 5,
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "1080p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    },
+    {
+      "name": "Infinitalk - From Audio",
+      "category": "video",
+      "endpoint": "/api/v1/jobs/createTask",
+      "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
+      "method": "POST",
+      "modelIds": [
+        "infinitalk/from-audio"
+      ],
+      "parameters": {
+        "required": {
+          "model": {
+            "type": "string",
+            "example": "infinitalk/from-audio",
+            "description": ""
+          },
+          "input": {
+            "type": "object",
+            "example": null,
+            "description": ""
+          },
+          "prompt": {
+            "type": "string",
+            "example": "A young woman with long dark hair talking on a podcast.",
+            "description": ""
+          }
+        },
+        "optional": {
+          "audio_url": {
+            "type": "string",
+            "example": "https://file.aiquickdraw.com/custom-page/akr/section-images/1757329255705mmqwrnri.mp3",
+            "description": ""
+          },
+          "resolution": {
+            "type": "string",
+            "example": "480p\"</span></span>\n<span class=\"line\"><span style=\"color:#0A3069;--shiki-dark:#CE9178\">",
+            "description": ""
+          }
+        }
+      },
+      "pricing": {
+        "credits": null
+      }
+    }
+  ]
+}

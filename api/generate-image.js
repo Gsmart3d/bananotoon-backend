@@ -1,106 +1,14 @@
 /**
- * Vercel Endpoint - Transform with Dynamic Models
- * Supports 106+ AI models via modelId + parameters
- * Endpoint: /api/transform
+ * Vercel Endpoint - Universal AI Generation
+ * Supports 150+ AI models via intelligent routing
+ * Endpoint: /api/generate-image
  */
 const { getFirestore, admin } = require('./_firebase');
-
-// Load models catalog using require() (works on Vercel serverless)
-let modelsCatalog = null;
-function loadModelsCatalog() {
-  if (modelsCatalog) return modelsCatalog;
-  try {
-    const allModels = [];
-
-    // Use require() instead of fs.readFileSync() for Vercel compatibility
-    try {
-      const imageModels = require('../image-models.json');
-      console.log(`Loaded ${imageModels.models.length} image models`);
-      allModels.push(...imageModels.models);
-    } catch (err) { console.error('Failed to load image-models.json:', err.message); }
-
-    try {
-      const videoModels = require('../video-models.json');
-      console.log(`Loaded ${videoModels.models.length} video models`);
-      allModels.push(...videoModels.models);
-    } catch (err) { console.error('Failed to load video-models.json:', err.message); }
-
-    try {
-      const audioModels = require('../audio-models.json');
-      console.log(`Loaded ${audioModels.models.length} audio models`);
-      allModels.push(...audioModels.models);
-    } catch (err) { console.error('Failed to load audio-models.json:', err.message); }
-
-    try {
-      const chatModels = require('../chat-models.json');
-      console.log(`Loaded ${chatModels.models.length} chat models`);
-      allModels.push(...chatModels.models);
-    } catch (err) { console.error('Failed to load chat-models.json:', err.message); }
-
-    try {
-      const enhancementModels = require('../enhancement-models.json');
-      console.log(`Loaded ${enhancementModels.models.length} enhancement models`);
-      allModels.push(...enhancementModels.models);
-    } catch (err) { console.error('Failed to load enhancement-models.json:', err.message); }
-
-    try {
-      const avatarModels = require('../avatar-models.json');
-      console.log(`Loaded ${avatarModels.models.length} avatar models`);
-      allModels.push(...avatarModels.models);
-    } catch (err) { console.error('Failed to load avatar-models.json:', err.message); }
-
-    modelsCatalog = { version: '1.0.0', models: allModels };
-    console.log(`✅ Total models loaded: ${allModels.length}`);
-    return modelsCatalog;
-  } catch (error) {
-    console.error('❌ Error loading models catalog:', error);
-    return { version: '1.0.0', models: [] };
-  }
-}
-
-function findModelById(modelId) {
-  const catalog = loadModelsCatalog();
-  return catalog?.models?.find(model => model.id === modelId);
-}
-
-function getModelCreditsCost(model) {
-  if (!model?.pricing) return 10;
-  const tier = model.pricing.standard || model.pricing.pro;
-  return tier?.credits_per_image || tier?.credits_per_second || tier?.credits_per_1000_chars || 10;
-}
-
-function buildInputFromParameters(model, userParameters) {
-  const input = {};
-
-  // Add user-provided parameters
-  Object.keys(userParameters).forEach(key => { input[key] = userParameters[key]; });
-
-  // Add defaults for REQUIRED parameters if not provided
-  if (model.parameters?.required) {
-    Object.entries(model.parameters.required).forEach(([key, param]) => {
-      if (!input[key] && param.default !== undefined && key !== 'model') {
-        input[key] = param.default;
-        console.log(`Adding required default: ${key} = ${param.default}`);
-      }
-    });
-  }
-
-  // Add defaults for OPTIONAL parameters if not provided
-  if (model.parameters?.optional) {
-    Object.entries(model.parameters.optional).forEach(([key, param]) => {
-      if (!input[key] && param.default !== undefined) {
-        input[key] = param.default;
-        console.log(`Adding optional default: ${key} = ${param.default}`);
-      }
-    });
-  }
-
-  return input;
-}
+const { routeRequest, calculateCreditsCost } = require('./_router');
 
 /**
  * Handle LEGACY request (style-based, old app format)
- * Supports: style="video", style="neutral", etc.
+ * For backward compatibility with existing Android app
  */
 async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrls, customPrompt, mode }) {
   try {
@@ -114,7 +22,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
 
     const userData = userDoc.data();
     const currentQuota = userData.quotaRemaining || 0;
-    const creditsCost = style === 'video' ? 25 : 10; // Video costs more
+    const creditsCost = style === 'video' ? 25 : 10;
 
     console.log('Current quota:', currentQuota);
     console.log('Credits cost:', creditsCost);
@@ -128,13 +36,12 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
       });
     }
 
-    // Build model name and input based on style
-    let modelName, input;
+    // Map legacy style to modelId
+    let modelId, parameters;
 
     if (style === 'video') {
-      // Video generation
-      modelName = 'wan/2-2-a14b-image-to-video-turbo';
-      input = {
+      modelId = 'wan-2-2-a14b-image-to-video-turbo';
+      parameters = {
         image_url: imageUrl,
         prompt: customPrompt || 'smooth cinematic motion',
         duration: 5,
@@ -142,55 +49,44 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
         resolution: '720p'
       };
     } else {
-      // Image generation with Flux-2-Pro (best quality)
-      modelName = mode === 'generate' ? 'flux-2/pro-text-to-image' : 'flux-2/pro-image-to-image';
-
-      input = {
+      modelId = mode === 'generate' ? 'flux-2-pro-text-to-image' : 'flux-2-pro-image-to-image';
+      parameters = {
         prompt: customPrompt || `Transform in ${style} style`,
         aspect_ratio: '1:1',
         resolution: '2K'
       };
 
       if (mode === 'edit' && imageUrl) {
-        input.image_url = imageUrl;
+        parameters.image_url = imageUrl;
       }
       if (imageUrls && imageUrls.length > 0) {
-        input.image_url = imageUrls[0]; // Use first image
+        parameters.image_url = imageUrls[0];
       }
     }
 
+    // Use intelligent routing
     const host = req.headers.host || 'bananotoon-backend1.vercel.app';
     const callbackUrl = `https://${host}/api/kie-callback`;
-    input.callBackUrl = callbackUrl;
 
-    console.log('KIE.AI Request:', { model: modelName, callbackUrl, input });
+    console.log('🔄 Routing legacy request:', { modelId, style, mode });
 
-    // Call KIE.AI API (CORRECT FORMAT)
-    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.KIE_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: modelName,
-        callBackUrl: callbackUrl,
-        input: input
-      })
-    });
+    const routeResult = await routeRequest(
+      modelId,
+      parameters,
+      callbackUrl,
+      process.env.KIE_API_KEY
+    );
 
-    const kieResult = await kieResponse.json();
-
-    if (kieResult.code !== 200) {
-      console.error('KIE.AI error:', kieResult);
+    if (!routeResult.success) {
+      console.error('❌ Routing failed:', routeResult.result);
       return res.status(500).json({
         success: false,
-        error: kieResult.msg || 'KIE.AI request failed',
-        details: kieResult
+        error: routeResult.result.msg || 'Generation failed',
+        details: routeResult.result
       });
     }
 
-    const taskId = kieResult.data?.taskId || kieResult.taskId;
+    const taskId = routeResult.result.data?.taskId || routeResult.result.taskId;
 
     // Deduct credits
     await userRef.update({
@@ -203,7 +99,8 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
       success: true,
       taskId: taskId,
       message: `Generation started!`,
-      creditsUsed: creditsCost
+      creditsUsed: creditsCost,
+      endpointUsed: routeResult.endpointUsed
     });
 
   } catch (error) {
@@ -217,17 +114,11 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
 
 /**
  * Handle DYNAMIC request (modelId + parameters, new system)
+ * Supports ALL 150+ models via intelligent routing
  */
 async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
   try {
-    // Find model in catalog
-    const model = findModelById(modelId);
-    if (!model) {
-      console.error('Model not found:', modelId);
-      return res.status(404).json({ error: `Model not found: ${modelId}` });
-    }
-
-    console.log('Found model:', model.name);
+    console.log('🚀 Dynamic request:', { userId, modelId, parametersCount: Object.keys(parameters || {}).length });
 
     // Get user and check credits
     const db = getFirestore();
@@ -240,7 +131,19 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
 
     const userData = userDoc.data();
     const currentQuota = userData.quotaRemaining || 0;
-    const creditsCost = getModelCreditsCost(model);
+
+    // Calculate credits cost using router
+    const { findEndpointForModel, calculateCreditsCost } = require('./_router');
+    const endpointConfig = findEndpointForModel(modelId);
+
+    if (!endpointConfig) {
+      return res.status(404).json({
+        error: `Model not found: ${modelId}`,
+        hint: 'Check available models in api-endpoints-mapping.json'
+      });
+    }
+
+    const creditsCost = calculateCreditsCost(endpointConfig, parameters);
 
     console.log('Current quota:', currentQuota);
     console.log('Credits cost:', creditsCost);
@@ -254,58 +157,27 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
       });
     }
 
-    // Build input
+    // Use intelligent routing
     const host = req.headers.host || 'bananotoon-backend1.vercel.app';
     const callbackUrl = `https://${host}/api/kie-callback`;
-    const input = buildInputFromParameters(model, parameters);
 
-    // Always add callback URL
-    input.callBackUrl = callbackUrl;
+    const routeResult = await routeRequest(
+      modelId,
+      parameters,
+      callbackUrl,
+      process.env.KIE_API_KEY
+    );
 
-    console.log('Final input:', JSON.stringify(input, null, 2));
-
-    // Get actual model name from catalog (not endpoint!)
-    // Some models use "default", others use "value" (like ElevenLabs)
-    // Check both required AND optional parameters
-    const modelName = model.parameters?.required?.model?.default ||
-                      model.parameters?.required?.model?.value ||
-                      model.parameters?.optional?.model?.default ||
-                      model.parameters?.optional?.model?.value ||
-                      model.endpoint;
-
-    // Remove "model" from input if it exists (it goes in top-level body)
-    const cleanInput = { ...input };
-    delete cleanInput.model;
-
-    console.log('Using model name:', modelName);
-    console.log('Clean input:', JSON.stringify(cleanInput, null, 2));
-
-    // Call KIE.AI API (CORRECT FORMAT)
-    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.KIE_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: modelName,
-        callBackUrl: cleanInput.callBackUrl,
-        input: cleanInput
-      })
-    });
-
-    const kieResult = await kieResponse.json();
-
-    if (kieResult.code !== 200) {
-      console.error('KIE.AI error:', kieResult);
+    if (!routeResult.success) {
+      console.error('❌ Routing failed:', routeResult.result);
       return res.status(500).json({
         success: false,
-        error: kieResult.msg || 'KIE.AI request failed',
-        details: kieResult
+        error: routeResult.result.msg || 'Generation failed',
+        details: routeResult.result
       });
     }
 
-    const taskId = kieResult.data?.taskId || kieResult.taskId;
+    const taskId = routeResult.result.data?.taskId || routeResult.result.taskId;
 
     // Deduct credits
     await userRef.update({
@@ -317,11 +189,12 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
     return res.status(200).json({
       success: true,
       taskId: taskId,
-      message: `${model.name} generation started!`,
-      modelName: model.name,
-      modelType: model.type,
+      message: `${endpointConfig.name} generation started!`,
+      modelName: endpointConfig.name,
+      modelType: endpointConfig.category,
       creditsUsed: creditsCost,
-      estimatedTime: model.type === 'video' ? '30-90 seconds' : '10-30 seconds'
+      endpointUsed: routeResult.endpointUsed,
+      estimatedTime: endpointConfig.category === 'video' ? '30-90 seconds' : '10-30 seconds'
     });
 
   } catch (error) {
@@ -334,7 +207,7 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
 }
 
 module.exports = async (req, res) => {
-  console.log('🚀 GENERATE-IMAGE.JS - HYBRID ENDPOINT (Legacy + Dynamic)');
+  console.log('🚀 GENERATE-IMAGE.JS - UNIVERSAL AI GENERATION (150+ Models)');
 
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -349,9 +222,7 @@ module.exports = async (req, res) => {
   console.log('userId:', userId);
   console.log('modelId:', modelId);
   console.log('style:', style);
-  console.log('parameters:', parameters);
-  console.log('imageUrl:', imageUrl);
-  console.log('mode:', mode);
+  console.log('parameters:', parameters ? Object.keys(parameters) : 'none');
 
   // Validate userId
   if (!userId) return res.status(400).json({ error: 'Missing userId' });
@@ -364,7 +235,7 @@ module.exports = async (req, res) => {
 
   // DYNAMIC MODE: If modelId is provided (new dynamic system)
   if (modelId) {
-    console.log('🚀 DYNAMIC MODE: Using modelId + parameters');
+    console.log('🚀 DYNAMIC MODE: Using intelligent routing');
     if (!parameters) return res.status(400).json({ error: 'Missing parameters for dynamic mode' });
     return handleDynamicRequest(req, res, { userId, modelId, parameters });
   }
