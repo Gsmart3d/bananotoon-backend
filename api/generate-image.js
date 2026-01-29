@@ -17,7 +17,20 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
     const userDoc = await userRef.get();
 
     if (!userDoc.exists) {
-      return res.status(404).json({ error: 'User not found' });
+      // Auto-create test users
+      if (userId.startsWith('test-')) {
+        console.log(`Creating test user: ${userId}`);
+        await userRef.set({
+          userId: userId,
+          email: `${userId}@test.bananotoon.app`,
+          displayName: 'Test User',
+          quotaRemaining: 10000,
+          createdAt: admin.firestore.Timestamp.now(),
+          isTestUser: true
+        });
+      } else {
+        return res.status(404).json({ error: 'User not found' });
+      }
     }
 
     const userData = userDoc.data();
