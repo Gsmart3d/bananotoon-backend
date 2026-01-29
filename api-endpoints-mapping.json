@@ -39,7 +39,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "market"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -54,7 +56,9 @@
       "endpoint": "/api/v1/generate/add-vocals",
       "full_url": "https://api.kie.ai/api/v1/generate/add-vocals",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "V4_5PLUS"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -86,7 +90,9 @@
       "endpoint": "/api/v1/suno/cover/generate",
       "full_url": "https://api.kie.ai/api/v1/suno/cover/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-music-cover"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -107,7 +113,9 @@
       "endpoint": "/api/v1/generate/get-timestamped-lyrics",
       "full_url": "https://api.kie.ai/api/v1/generate/get-timestamped-lyrics",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-timestamped-lyrics"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -128,7 +136,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-vocal-separation-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -143,7 +153,9 @@
       "endpoint": "/api/v1/generate/generate-persona",
       "full_url": "https://api.kie.ai/api/v1/generate/generate-persona",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-persona"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -164,7 +176,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "midi-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -179,7 +193,9 @@
       "endpoint": "/api/v1/wav/generate",
       "full_url": "https://api.kie.ai/api/v1/wav/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "convert-to-wav-format"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -200,7 +216,9 @@
       "endpoint": "/api/v1/style/generate",
       "full_url": "https://api.kie.ai/api/v1/style/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "boost-music-style"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -215,7 +233,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-wav-conversion-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -230,7 +250,9 @@
       "endpoint": "/api/v1/suno/cover/record-info",
       "full_url": "https://api.kie.ai/api/v1/suno/cover/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-music-cover-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -245,7 +267,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "music-extension-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -260,7 +284,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-midi-generation-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -275,7 +301,9 @@
       "endpoint": "/api/v1/mp4/generate",
       "full_url": "https://api.kie.ai/api/v1/mp4/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "create-music-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -296,7 +324,9 @@
       "endpoint": "/api/v1/generate/upload-extend",
       "full_url": "https://api.kie.ai/api/v1/generate/upload-extend",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "V4"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -333,7 +363,9 @@
       "endpoint": "/api/v1/generate/record-info",
       "full_url": "https://api.kie.ai/api/v1/generate/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-music-task-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -343,12 +375,14 @@
       }
     },
     {
-      "name": "Vocal &amp; Instrument Stem Separation",
+      "name": "Vocal\u202f&amp;\u202fInstrument Stem\u00a0Separation",
       "category": "audio",
       "endpoint": "/api/v1/vocal-removal/generate",
       "full_url": "https://api.kie.ai/api/v1/vocal-removal/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "vocal\u202f&amp;\u202finstrument-stem\u00a0separation"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -369,7 +403,9 @@
       "endpoint": "/api/v1/midi/generate",
       "full_url": "https://api.kie.ai/api/v1/midi/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-midi-from-audio"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -390,7 +426,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "replace-music-section-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -405,7 +443,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "audio-upload-and-extension-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -420,7 +460,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "add-instrumental-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -435,7 +477,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-lyrics-task-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -450,7 +494,9 @@
       "endpoint": "/api/v1/generate/add-instrumental",
       "full_url": "https://api.kie.ai/api/v1/generate/add-instrumental",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "V4_5PLUS"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -471,7 +517,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "audio-separation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -486,7 +534,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "music-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -501,7 +551,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-lyrics"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -522,7 +574,9 @@
       "endpoint": "/api/v1/generate/extend",
       "full_url": "https://api.kie.ai/api/v1/generate/extend",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "V4"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -554,7 +608,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "music-video-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -569,7 +625,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-music-video-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -584,7 +642,9 @@
       "endpoint": "/api/v1/generate/replace-section",
       "full_url": "https://api.kie.ai/api/v1/generate/replace-section",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "replace-music-section"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -611,7 +671,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "common-api-quickstart"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -626,7 +688,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-download-url-for-generated-files"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -647,7 +711,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-remaining-credits"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -662,7 +728,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-4k-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -683,7 +751,9 @@
       "endpoint": "/api/v1/veo/generate",
       "full_url": "https://api.kie.ai/api/v1/veo/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-veo-3.1-ai-video(fast&amp;quality)"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -698,7 +768,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-veo3.1-video-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -713,7 +785,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-1080p-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -728,7 +802,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-4k-video-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -782,7 +858,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "file-stream-upload"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -797,7 +875,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "base64-file-upload"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -812,7 +892,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "file-upload-api-quickstart"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -827,7 +909,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "url-file-upload"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -842,7 +926,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-task-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -857,7 +943,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "getting-started-with--(important)"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -872,7 +960,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "ai-video-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -887,7 +977,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "ai-video-extension-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -902,7 +994,9 @@
       "endpoint": "/api/v1/runway/generate",
       "full_url": "https://api.kie.ai/api/v1/runway/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "runway-duration-5-generate"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -934,7 +1028,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-aleph-video-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -949,7 +1045,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "extend-ai-video"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -981,7 +1079,9 @@
       "endpoint": "/api/v1/aleph/generate",
       "full_url": "https://api.kie.ai/api/v1/aleph/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-aleph-video"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -1008,7 +1108,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-ai-video-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1023,7 +1125,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "aleph-video-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1038,7 +1142,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-image-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1087,7 +1193,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "image-generation-or-editing-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1102,7 +1210,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "luma-modify-video-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1117,7 +1227,9 @@
       "endpoint": "/api/v1/modify/generate",
       "full_url": "https://api.kie.ai/api/v1/modify/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-luma-modify-video"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -1144,7 +1256,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "4o-image-generation-callbacks"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1159,7 +1273,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "GET",
-      "modelIds": [],
+      "modelIds": [
+        "get-4o-image-details"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -1169,12 +1285,14 @@
       }
     },
     {
-      "name": "Generate 4o Image（GPT IMAG 1）",
+      "name": "Generate 4o Image\uff08GPT IMAG 1\uff09",
       "category": "image",
       "endpoint": "/api/v1/gpt4o-image/generate",
       "full_url": "https://api.kie.ai/api/v1/gpt4o-image/generate",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "generate-4o-image\uff08gpt-imag-1\uff09"
+      ],
       "parameters": {
         "required": {
           "prompt": {
@@ -1195,7 +1313,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "get-direct-download-url"
+      ],
       "parameters": {
         "required": {},
         "optional": {
@@ -1221,7 +1341,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "nano-banana-pro"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -1887,7 +2009,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "ideogram---v3-reframe"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -2044,7 +2168,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "qwen---image-to-image"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -2298,7 +2424,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "z-image"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -2547,7 +2675,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "gemini-2.5-flash"
+      ],
       "parameters": {
         "required": {
           "text": {
@@ -2584,7 +2714,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "gemini-2.5-pro"
+      ],
       "parameters": {
         "required": {
           "text": {
@@ -2621,7 +2753,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "gemini-3-pro"
+      ],
       "parameters": {
         "required": {
           "text": {
@@ -2658,7 +2792,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "claude-sonnet-4.5"
+      ],
       "parameters": {
         "required": {
           "text": {
@@ -2695,7 +2831,9 @@
       "endpoint": "/api/v1/aleph/record-info",
       "full_url": "https://api.kie.ai/api/v1/aleph/record-info",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "claude-opus-4.5"
+      ],
       "parameters": {
         "required": {
           "text": {
@@ -2732,7 +2870,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "hailuo---image-to-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -2903,7 +3043,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "hailuo-pro---text-to-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -3073,7 +3215,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "kling-2.6---text-to-video"
+      ],
       "parameters": {
         "required": {},
         "optional": {}
@@ -3445,7 +3589,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-pro-text-to-video"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3477,7 +3623,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-characters"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3509,7 +3657,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-pro-storyboard"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3546,7 +3696,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-watermark-remover"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3572,7 +3724,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-text-to-video"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3604,7 +3758,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-image-to-video"
+      ],
       "parameters": {
         "required": {
           "model": {
@@ -3636,7 +3792,9 @@
       "endpoint": "/api/v1/jobs/createTask",
       "full_url": "https://api.kie.ai/api/v1/jobs/createTask",
       "method": "POST",
-      "modelIds": [],
+      "modelIds": [
+        "sora-2-pro-image-to-video"
+      ],
       "parameters": {
         "required": {
           "model": {
