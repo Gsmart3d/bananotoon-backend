@@ -69,43 +69,54 @@ module.exports = {
 
   'gpt-image/1.5-text-to-image': {
     endpoint: '/api/v1/jobs/createTask',
-    buildRequest: (params, callbackUrl) => ({
-      model: 'gpt-image/1.5-text-to-image',
-      callBackUrl: callbackUrl,
-      input: {
-        prompt: params.prompt || 'a beautiful image'
-      },
-      aspect_ratio: params.aspect_ratio || '1:1',
-      quality: params.quality || 'medium'
-    }),
+    buildRequest: (params, callbackUrl) => {
+      const req = {
+        model: 'gpt-image/1.5-text-to-image',
+        callBackUrl: callbackUrl,
+        input: {
+          prompt: params.prompt || 'a beautiful image'
+        }
+      };
+      // Add optional parameters if provided
+      if (params.aspect_ratio) req.aspect_ratio = params.aspect_ratio;
+      if (params.quality) req.quality = params.quality;
+      return req;
+    },
     credits: 12
   },
 
   'flux-2/pro-text-to-image': {
     endpoint: '/api/v1/jobs/createTask',
-    buildRequest: (params, callbackUrl) => ({
-      model: 'flux-2/pro-text-to-image',
-      callBackUrl: callbackUrl,
-      input: {
-        prompt: params.prompt || 'a beautiful image'
-      },
-      aspect_ratio: params.aspect_ratio || '1:1',
-      resolution: params.resolution || '2K'
-    }),
+    buildRequest: (params, callbackUrl) => {
+      const req = {
+        model: 'flux-2/pro-text-to-image',
+        callBackUrl: callbackUrl,
+        input: {
+          prompt: params.prompt || 'a beautiful image'
+        }
+      };
+      if (params.aspect_ratio) req.aspect_ratio = params.aspect_ratio;
+      if (params.resolution) req.resolution = params.resolution;
+      return req;
+    },
     credits: 18
   },
 
   'flux-2/flex-text-to-image': {
     endpoint: '/api/v1/jobs/createTask',
-    buildRequest: (params, callbackUrl) => ({
-      model: 'flux-2/flex-text-to-image',
-      callBackUrl: callbackUrl,
-      input: {
-        prompt: params.prompt || 'a beautiful image'
-      },
-      aspect_ratio: params.aspect_ratio || '1:1',
-      resolution: params.resolution || '1K'
-    }),
+    buildRequest: (params, callbackUrl) => {
+      const req = {
+        model: 'flux-2/flex-text-to-image',
+        callBackUrl: callbackUrl,
+        input: {
+          prompt: params.prompt || 'a beautiful image'
+        }
+      };
+      // Add optional parameters if provided (but they seem required by API)
+      if (params.aspect_ratio) req.aspect_ratio = params.aspect_ratio;
+      if (params.resolution) req.resolution = params.resolution;
+      return req;
+    },
     credits: 12
   },
 
