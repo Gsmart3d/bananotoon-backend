@@ -8,17 +8,27 @@ function initFirebase() {
     return firebaseApp;
   }
 
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY
-    ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
-    : undefined;
+  // Support both FIREBASE_SERVICE_ACCOUNT (single JSON) and separate variables
+  let credential;
 
-  firebaseApp = admin.initializeApp({
-    credential: admin.credential.cert({
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    // Use single JSON service account (preferred)
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    credential = admin.credential.cert(serviceAccount);
+  } else {
+    // Fallback to separate variables
+    const privateKey = process.env.FIREBASE_PRIVATE_KEY
+      ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+      : undefined;
+
+    credential = admin.credential.cert({
       projectId: process.env.FIREBASE_PROJECT_ID,
       privateKey: privateKey,
       clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    }),
-  });
+    });
+  }
+
+  firebaseApp = admin.initializeApp({ credential });
 
   return firebaseApp;
 }
