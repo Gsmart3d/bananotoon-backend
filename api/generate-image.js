@@ -266,8 +266,11 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
 
     // Get actual model name from catalog (not endpoint!)
     // Some models use "default", others use "value" (like ElevenLabs)
+    // Check both required AND optional parameters
     const modelName = model.parameters?.required?.model?.default ||
                       model.parameters?.required?.model?.value ||
+                      model.parameters?.optional?.model?.default ||
+                      model.parameters?.optional?.model?.value ||
                       model.endpoint;
 
     // Remove "model" from input if it exists (it goes in top-level body)
