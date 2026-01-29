@@ -158,26 +158,52 @@ function calculateCreditsCost(endpointConfig, parameters) {
 async function routeRequest(modelId, userParameters, callbackUrl, apiKey) {
   console.log(`🔀 Routing request for model: ${modelId}`);
 
-  // Find endpoint configuration
+  // PRIORITÉ 1: Hardcoded configs (configurations testées et validées)
+  const hardcodedConfigs = require('./_model-configs');
+  if (hardcodedConfigs[modelId]) {
+    const config = hardcodedConfigs[modelId];
+    const body = config.buildRequest(userParameters, callbackUrl);
+    const fullUrl = `https://api.kie.ai${config.endpoint}`;
+
+    console.log(`✅ Using HARDCODED config for ${modelId}`);
+    console.log(`📤 Sending to: ${fullUrl}`);
+    console.log(`💳 Credits: ${config.credits}`);
+    console.log(`📦 Body:`, JSON.stringify(body, null, 2));
+
+    const response = await fetch(fullUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify(body)
+    });
+
+    const result = await response.json();
+
+    return {
+      success: result.code === 200,
+      result: result,
+      creditsCost: config.credits,
+      endpointUsed: config.endpoint
+    };
+  }
+
+  // PRIORITÉ 2: Fallback vers mapping auto (pour les autres modèles)
   const endpointConfig = findEndpointForModel(modelId);
   if (!endpointConfig) {
     throw new Error(`Model not supported: ${modelId}`);
   }
 
-  // Build request body
   const body = buildRequestBody(endpointConfig, userParameters, callbackUrl);
-
-  // Calculate credits cost
   const creditsCost = calculateCreditsCost(endpointConfig, userParameters);
-
-  // Build full URL
   const fullUrl = endpointConfig.full_url || `https://api.kie.ai${endpointConfig.endpoint}`;
 
+  console.log(`⚠️ Using AUTO-MAPPING for ${modelId} (not tested)`);
   console.log(`📤 Sending to: ${fullUrl}`);
   console.log(`💳 Credits cost: ${creditsCost}`);
   console.log(`📦 Body:`, JSON.stringify(body, null, 2));
 
-  // Make request to KIE.AI
   const response = await fetch(fullUrl, {
     method: endpointConfig.method || 'POST',
     headers: {
