@@ -82,13 +82,12 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
       });
     }
 
-    // Build endpoint and input based on style
-    let endpoint, channel, input;
+    // Build model name and input based on style
+    let modelName, input;
 
     if (style === 'video') {
       // Video generation
-      endpoint = 'wan/2-2-a14b-image-to-video-turbo';
-      channel = 'wan_request';
+      modelName = 'wan/2-2-a14b-image-to-video-turbo';
       input = {
         image_url: imageUrl,
         prompt: customPrompt || 'smooth cinematic motion',
@@ -97,13 +96,13 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
         resolution: '720p'
       };
     } else {
-      // Image generation with nano-banana or nano-banana-pro
-      endpoint = mode === 'generate' ? 'fal-ai/nano-banana/text-to-image' : 'fal-ai/nano-banana/image-to-image';
-      channel = 'fal_request';
+      // Image generation with Flux-2-Pro (best quality)
+      modelName = mode === 'generate' ? 'flux-2/pro-text-to-image' : 'flux-2/pro-image-to-image';
 
       input = {
         prompt: customPrompt || `Transform in ${style} style`,
-        image_size: 'square_hd'
+        aspect_ratio: '1:1',
+        resolution: '2K'
       };
 
       if (mode === 'edit' && imageUrl) {
@@ -118,7 +117,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
     const callbackUrl = `https://${host}/api/kie-callback`;
     input.callBackUrl = callbackUrl;
 
-    console.log('KIE.AI Request:', { model: endpoint, callbackUrl, input });
+    console.log('KIE.AI Request:', { model: modelName, callbackUrl, input });
 
     // Call KIE.AI API (CORRECT FORMAT)
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
@@ -128,7 +127,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
         'Authorization': `Bearer ${process.env.KIE_API_KEY}`
       },
       body: JSON.stringify({
-        model: endpoint,
+        model: modelName,
         callBackUrl: callbackUrl,
         input: input
       })
@@ -219,6 +218,16 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
 
     console.log('Final input:', JSON.stringify(input, null, 2));
 
+    // Get actual model name from catalog (not endpoint!)
+    const modelName = model.parameters?.required?.model?.default || model.endpoint;
+
+    // Remove "model" from input if it exists (it goes in top-level body)
+    const cleanInput = { ...input };
+    delete cleanInput.model;
+
+    console.log('Using model name:', modelName);
+    console.log('Clean input:', JSON.stringify(cleanInput, null, 2));
+
     // Call KIE.AI API (CORRECT FORMAT)
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
@@ -227,9 +236,9 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
         'Authorization': `Bearer ${process.env.KIE_API_KEY}`
       },
       body: JSON.stringify({
-        model: model.endpoint,
-        callBackUrl: input.callBackUrl,
-        input: input
+        model: modelName,
+        callBackUrl: cleanInput.callBackUrl,
+        input: cleanInput
       })
     });
 
