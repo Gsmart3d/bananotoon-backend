@@ -118,30 +118,34 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
     const callbackUrl = `https://${host}/api/kie-callback`;
     input.callBackUrl = callbackUrl;
 
-    console.log('KIE.AI Request:', { endpoint, channel, input });
+    console.log('KIE.AI Request:', { model: endpoint, callBackUrl, input });
 
-    // Call KIE.AI API
+    // Call KIE.AI API (CORRECT FORMAT)
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.KIE_AI_KEY
+        'Authorization': `Bearer ${process.env.KIE_API_KEY}`
       },
-      body: JSON.stringify({ endpoint, channel, input })
+      body: JSON.stringify({
+        model: endpoint,
+        callBackUrl: callbackUrl,
+        input: input
+      })
     });
 
     const kieResult = await kieResponse.json();
 
-    if (!kieResult.success || !kieResult.data?.taskId) {
+    if (kieResult.code !== 200) {
       console.error('KIE.AI error:', kieResult);
       return res.status(500).json({
         success: false,
-        error: kieResult.error || 'KIE.AI request failed',
+        error: kieResult.msg || 'KIE.AI request failed',
         details: kieResult
       });
     }
 
-    const taskId = kieResult.data.taskId;
+    const taskId = kieResult.data?.taskId || kieResult.taskId;
 
     // Deduct credits
     await userRef.update({
@@ -217,32 +221,32 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
 
     console.log('Final input:', JSON.stringify(input, null, 2));
 
-    // Call KIE.AI API
+    // Call KIE.AI API (CORRECT FORMAT)
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.KIE_AI_KEY
+        'Authorization': `Bearer ${process.env.KIE_API_KEY}`
       },
       body: JSON.stringify({
-        endpoint: model.endpoint,
-        channel: model.channel || 'fal_request',
+        model: model.endpoint,
+        callBackUrl: input.callBackUrl,
         input: input
       })
     });
 
     const kieResult = await kieResponse.json();
 
-    if (!kieResult.success || !kieResult.data?.taskId) {
+    if (kieResult.code !== 200) {
       console.error('KIE.AI error:', kieResult);
       return res.status(500).json({
         success: false,
-        error: kieResult.error || 'KIE.AI request failed',
+        error: kieResult.msg || 'KIE.AI request failed',
         details: kieResult
       });
     }
 
-    const taskId = kieResult.data.taskId;
+    const taskId = kieResult.data?.taskId || kieResult.taskId;
 
     // Deduct credits
     await userRef.update({
