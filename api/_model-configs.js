@@ -64,9 +64,9 @@ module.exports = {
       model: 'grok-imagine/text-to-image',
       callBackUrl: callbackUrl,
       input: {
-        prompt: params.prompt || 'a beautiful image'
-      },
-      aspect_ratio: params.aspect_ratio || '1:1'
+        prompt: params.prompt || 'a beautiful image',
+        aspect_ratio: params.aspect_ratio || '3:2'
+      }
     }),
     credits: 10
   },
