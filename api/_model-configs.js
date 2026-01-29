@@ -58,10 +58,10 @@ module.exports = {
 
   // ========== IMAGE MODELS - GROK IMAGINE ==========
 
-  'grok-imagine-text-to-image': {
+  'grok-imagine/text-to-image': {
     endpoint: '/api/v1/jobs/createTask',
     buildRequest: (params, callbackUrl) => ({
-      model: 'grok-imagine-text-to-image',
+      model: 'grok-imagine/text-to-image',
       callBackUrl: callbackUrl,
       input: {
         prompt: params.prompt || 'a beautiful image'
@@ -320,10 +320,10 @@ module.exports = {
 
   // ========== AUDIO MODELS - ELEVENLABS ==========
 
-  'elevenlabs-sound-effect-v2': {
+  'elevenlabs/sound-effect-v2': {
     endpoint: '/api/v1/jobs/createTask',
     buildRequest: (params, callbackUrl) => ({
-      model: 'elevenlabs-sound-effect-v2',
+      model: 'elevenlabs/sound-effect-v2',
       callBackUrl: callbackUrl,
       input: {
         text: params.text || params.prompt || 'a sound effect',
@@ -333,23 +333,23 @@ module.exports = {
     credits: 10
   },
 
-  'elevenlabs-tts-v2': {
+  'elevenlabs/text-to-speech-turbo-2-5': {
     endpoint: '/api/v1/jobs/createTask',
     buildRequest: (params, callbackUrl) => ({
-      model: 'elevenlabs-tts-v2',
+      model: 'elevenlabs/text-to-speech-turbo-2-5',
       callBackUrl: callbackUrl,
       input: {
         text: params.text || params.prompt || 'Hello world',
-        voice: params.voice || 'default'
+        voice: params.voice || 'Rachel'
       }
     }),
     credits: 8
   },
 
-  'elevenlabs-tts-standard': {
+  'elevenlabs/text-to-speech-multilingual-v2': {
     endpoint: '/api/v1/jobs/createTask',
     buildRequest: (params, callbackUrl) => ({
-      model: 'elevenlabs-tts-standard',
+      model: 'elevenlabs/text-to-speech-multilingual-v2',
       callBackUrl: callbackUrl,
       input: {
         text: params.text || params.prompt || 'Hello world'
