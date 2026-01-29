@@ -14,7 +14,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
   try {
     const db = getFirestore();
     const userRef = db.collection('users').doc(userId);
-    const userDoc = await userRef.get();
+    let userDoc = await userRef.get();
 
     if (!userDoc.exists) {
       // Auto-create test users
@@ -28,6 +28,8 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
           createdAt: admin.firestore.Timestamp.now(),
           isTestUser: true
         });
+        // Re-fetch after creation
+        userDoc = await userRef.get();
       } else {
         return res.status(404).json({ error: 'User not found' });
       }
@@ -136,7 +138,7 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
     // Get user and check credits
     const db = getFirestore();
     const userRef = db.collection('users').doc(userId);
-    const userDoc = await userRef.get();
+    let userDoc = await userRef.get();
 
     if (!userDoc.exists) {
       // Auto-create test users
@@ -150,6 +152,8 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
           createdAt: admin.firestore.Timestamp.now(),
           isTestUser: true
         });
+        // Re-fetch after creation
+        userDoc = await userRef.get();
       } else {
         return res.status(404).json({ error: 'User not found' });
       }
