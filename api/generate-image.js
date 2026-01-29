@@ -71,12 +71,30 @@ function getModelCreditsCost(model) {
 
 function buildInputFromParameters(model, userParameters) {
   const input = {};
+
+  // Add user-provided parameters
   Object.keys(userParameters).forEach(key => { input[key] = userParameters[key]; });
-  if (model.parameters?.optional) {
-    Object.entries(model.parameters.optional).forEach(([key, param]) => {
-      if (!input[key] && param.default !== undefined) input[key] = param.default;
+
+  // Add defaults for REQUIRED parameters if not provided
+  if (model.parameters?.required) {
+    Object.entries(model.parameters.required).forEach(([key, param]) => {
+      if (!input[key] && param.default !== undefined && key !== 'model') {
+        input[key] = param.default;
+        console.log(`Adding required default: ${key} = ${param.default}`);
+      }
     });
   }
+
+  // Add defaults for OPTIONAL parameters if not provided
+  if (model.parameters?.optional) {
+    Object.entries(model.parameters.optional).forEach(([key, param]) => {
+      if (!input[key] && param.default !== undefined) {
+        input[key] = param.default;
+        console.log(`Adding optional default: ${key} = ${param.default}`);
+      }
+    });
+  }
+
   return input;
 }
 
