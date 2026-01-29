@@ -65,7 +65,8 @@ module.exports = {
       callBackUrl: callbackUrl,
       input: {
         prompt: params.prompt || 'a beautiful image'
-      }
+      },
+      aspect_ratio: params.aspect_ratio || '1:1'
     }),
     credits: 10
   },
