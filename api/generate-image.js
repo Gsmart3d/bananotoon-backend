@@ -87,7 +87,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
 
     if (style === 'video') {
       // Video generation
-      endpoint = '/wan/2-2-a14b-image-to-video-turbo';
+      endpoint = 'wan/2-2-a14b-image-to-video-turbo';
       channel = 'wan_request';
       input = {
         image_url: imageUrl,
@@ -98,7 +98,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
       };
     } else {
       // Image generation with nano-banana or nano-banana-pro
-      endpoint = mode === 'generate' ? '/fal-ai/nano-banana/text-to-image' : '/fal-ai/nano-banana/image-to-image';
+      endpoint = mode === 'generate' ? 'fal-ai/nano-banana/text-to-image' : 'fal-ai/nano-banana/image-to-image';
       channel = 'fal_request';
 
       input = {
