@@ -1,183 +1,62 @@
 /**
- * Vercel Endpoint - Generate Image (text-to-image)
- * Génère une image depuis un prompt avec API KIE.AI
- * Endpoint: /api/generate-image
+ * Vercel Endpoint - Transform with Dynamic Models
+ * Supports 106+ AI models via modelId + parameters
+ * Endpoint: /api/transform
  */
 const { getFirestore, admin } = require('./_firebase');
+const fs = require('fs');
+const path = require('path');
 
-// Master prompts pour transformer la référence dans le style choisi
-const STYLE_PROMPTS = {
-  neutral: 'high quality professional photography, preserve all facial features and details, maintain original composition and style, realistic rendering, natural lighting',
-  pixar: 'turn this character into Pixar 3D animation style, preserve facial features and identity, smooth CGI rendering, expressive eyes, vibrant colors, Disney-Pixar quality, professional character design, maintain pose and composition',
-  manga: 'transform this character into Japanese manga style, preserve facial features and expression, black and white ink art, dynamic screentone shading, bold linework, expressive manga eyes, detailed hair strands, professional manga artist quality',
-  anime: 'convert this character into anime style, keep facial structure and identity, vibrant cel-shaded colors, detailed anime shading, beautiful character design, sharp linework, expressive anime eyes, studio-quality animation style',
-  cartoon: 'turn this character into modern cartoon style, preserve character likeness, bold clean outlines, flat vibrant colors, simplified features, playful expression, professional cartoon illustration',
-  watercolor: 'transform this portrait into watercolor painting, maintain facial features and expression, soft watercolor brushstrokes, flowing colors, artistic paper texture, dreamy atmospheric painting, traditional art style',
-  oilpainting: 'convert this portrait into classical oil painting, preserve facial structure and likeness, rich oil paint textures, masterful brushwork, renaissance painting technique, museum-quality portrait art, deep colors and lighting',
-  sketch: 'turn this portrait into detailed pencil sketch, keep facial features accurate, professional sketching technique, varied pencil strokes, artistic shading and hatching, hand-drawn illustration quality, graphite on paper look',
-  comic: 'transform this character into American comic book style, preserve character identity, bold ink outlines, vibrant comic colors, dramatic cel shading, superhero comic aesthetic, professional comic art quality',
-  fantasy: 'convert this character into fantasy art style, maintain facial features, magical ethereal atmosphere, epic fantasy painting, dramatic lighting, mystical elements, professional fantasy illustration, rich detailed rendering',
-  cyberpunk: 'turn this character into cyberpunk style, keep character likeness, neon lighting effects, futuristic tech elements, cyberpunk aesthetic, dramatic sci-fi atmosphere, high-tech urban background, professional digital art',
-  retro: 'transform this character into retro 80s style, preserve facial features, vibrant neon colors, synthwave aesthetic, vintage 80s vibe, nostalgic retro art style, bold graphic design, professional retro illustration'
-};
-
-module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+// Load models catalog
+let modelsCatalog = null;
+function loadModelsCatalog() {
+  if (modelsCatalog) return modelsCatalog;
+  try {
+    const categoryFiles = ['image-models.json', 'video-models.json', 'audio-models.json', 'chat-models.json', 'enhancement-models.json', 'avatar-models.json'];
+    const allModels = [];
+    categoryFiles.forEach(filename => {
+      try {
+        const filePath = path.join(__dirname, '..', filename);
+        const fileData = fs.readFileSync(filePath, 'utf8');
+        const categoryData = JSON.parse(fileData);
+        allModels.push(...categoryData.models);
+      } catch (err) { console.warn(`Failed to load ${filename}:`, err.message); }
+    });
+    modelsCatalog = { version: '1.0.0', models: allModels };
+    return modelsCatalog;
+  } catch (error) {
+    console.error('Error loading models catalog:', error);
+    return null;
   }
+}
 
-  const { userId, style, customPrompt, imageUrl, imageUrls, mode, image_size, isPro, duration, resolution } = req.body;
+function findModelById(modelId) {
+  const catalog = loadModelsCatalog();
+  return catalog?.models?.find(model => model.id === modelId);
+}
 
-  if (!userId || !style) {
-    return res.status(400).json({ error: 'Missing userId or style' });
+function getModelCreditsCost(model) {
+  if (!model?.pricing) return 10;
+  const tier = model.pricing.standard || model.pricing.pro;
+  return tier?.credits_per_image || tier?.credits_per_second || tier?.credits_per_1000_chars || 10;
+}
+
+function buildInputFromParameters(model, userParameters) {
+  const input = {};
+  Object.keys(userParameters).forEach(key => { input[key] = userParameters[key]; });
+  if (model.parameters?.optional) {
+    Object.entries(model.parameters.optional).forEach(([key, param]) => {
+      if (!input[key] && param.default !== undefined) input[key] = param.default;
+    });
   }
+  return input;
+}
 
-  // VIDEO GENERATION MODE (style === "video")
-  if (style === 'video') {
-    if (!imageUrl && !imageUrls) {
-      return res.status(400).json({ error: 'imageUrl or imageUrls required for video generation' });
-    }
-
-    const videoImageUrl = imageUrl || (imageUrls && imageUrls[0]);
-    const videoDuration = duration || "5";
-    const videoResolution = resolution || "720p"; // 720p par défaut (moins cher)
-    const videoPrompt = customPrompt || 'A cinematic video transformation of this image with smooth camera movement';
-
-    try {
-      const db = getFirestore();
-      const userRef = db.collection('users').doc(userId);
-      const userDoc = await userRef.get();
-
-      if (!userDoc.exists) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-
-      const userData = userDoc.data();
-
-      // Vérifier les crédits (nouveau système)
-      const isPremium = userData.subscriptionTier === 'premium';
-      const hasCredits = userData.totalCredits > 0;
-
-      if (!isPremium && !hasCredits) {
-        return res.status(403).json({
-          error: 'No credits',
-          message: 'You have no credits. Subscribe or buy a credit pack!'
-        });
-      }
-
-      // Callback URL Vercel
-      const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
-      const callbackUrl = `https://${host}/api/kie-callback`;
-
-      // Always use wan/2-2-a14b-image-to-video-turbo
-      const videoModel = "wan/2-2-a14b-image-to-video-turbo";
-
-      console.log('=== VIDEO GENERATION ===');
-      console.log('userId:', userId);
-      console.log('imageUrl:', videoImageUrl);
-      console.log('prompt:', videoPrompt);
-      console.log('duration:', videoDuration, '(parsed:', parseInt(videoDuration), ')');
-      console.log('resolution:', videoResolution);
-      console.log('isPro:', isPro);
-      console.log('model:', videoModel);
-      console.log('aspect_ratio: 9:16 (fixed)');
-
-      // Appeler KIE.AI wan/2-2-a14b-image-to-video-turbo
-      // Duration is automatic for TURBO model (no need to specify)
-      const videoInput = {
-        image_url: videoImageUrl,
-        prompt: videoPrompt,
-        resolution: videoResolution,
-        aspect_ratio: "9:16", // Always 9:16
-        enable_prompt_expansion: false,
-        seed: 0,
-        acceleration: "none"
-      };
-
-      const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.KIE_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: videoModel,
-          callBackUrl: callbackUrl,
-          input: videoInput
-        })
-      });
-
-      const kieResult = await kieResponse.json();
-
-      if (kieResult.code !== 200) {
-        console.error('KIE.AI video error:', kieResult);
-        return res.status(500).json({
-          error: 'KIE.AI API error',
-          details: kieResult.msg
-        });
-      }
-
-      const taskId = kieResult.data.taskId;
-
-      // Décrémenter les crédits (sauf Premium qui a unlimited)
-      if (!isPremium) {
-        await userRef.update({
-          totalCredits: admin.firestore.FieldValue.increment(-1),
-          lifetimeTransformations: admin.firestore.FieldValue.increment(1),
-          transformationsCount: admin.firestore.FieldValue.increment(1)
-        });
-      } else {
-        await userRef.update({
-          lifetimeTransformations: admin.firestore.FieldValue.increment(1),
-          transformationsCount: admin.firestore.FieldValue.increment(1)
-        });
-      }
-
-      // Sauvegarder la transformation en pending
-      const transformationRef = db.collection('transformations').doc(taskId);
-      await transformationRef.set({
-        userId: userId,
-        taskId: taskId,
-        type: 'video',
-        prompt: videoPrompt,
-        originalImageUrl: videoImageUrl,
-        duration: videoDuration,
-        resolution: videoResolution,
-        status: 'pending',
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        subscriptionTier: userData.subscriptionTier
-      });
-
-      console.log(`✅ Video generation started - taskId: ${taskId}`);
-
-      return res.status(200).json({
-        success: true,
-        taskId: taskId,
-        message: 'Video generation started! This may take 30-60 seconds.',
-        estimatedTime: '30-60 seconds'
-      });
-
-    } catch (error) {
-      console.error('❌ Video generation error:', error);
-      return res.status(500).json({
-        success: false,
-        error: error.message
-      });
-    }
-  }
-
-  // IMAGE GENERATION MODE (normal flow)
-  // Mode can be 'generate' (text-to-image), 'edit' (image-to-image), or 'pro' (premium generation)
-  const generationMode = mode || (imageUrl || imageUrls ? 'edit' : 'generate');
-  const usePro = isPro === true || mode === 'pro';
-
-  if (generationMode === 'edit' && !imageUrl && !imageUrls) {
-    return res.status(400).json({ error: 'imageUrl or imageUrls required for edit mode' });
-  }
-
-  // Utiliser image_size depuis req.body, défaut 1:1
-  const imageSize = image_size || '1:1';
-
+/**
+ * Handle LEGACY request (style-based, old app format)
+ * Supports: style="video", style="neutral", etc.
+ */
+async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrls, customPrompt, mode }) {
   try {
     const db = getFirestore();
     const userRef = db.collection('users').doc(userId);
@@ -188,139 +67,245 @@ module.exports = async (req, res) => {
     }
 
     const userData = userDoc.data();
+    const currentQuota = userData.quotaRemaining || 0;
+    const creditsCost = style === 'video' ? 25 : 10; // Video costs more
 
-    // Vérifier les crédits (nouveau système)
-    const isPremium = userData.subscriptionTier === 'premium';
-    const hasCredits = userData.totalCredits > 0;
+    console.log('Current quota:', currentQuota);
+    console.log('Credits cost:', creditsCost);
 
-    if (!isPremium && !hasCredits) {
+    if (currentQuota < creditsCost) {
       return res.status(403).json({
-        error: 'No credits',
-        message: 'You have no credits. Subscribe or buy a credit pack!'
+        error: 'Insufficient credits',
+        message: `This requires ${creditsCost} credits. You have ${currentQuota} credits.`,
+        required: creditsCost,
+        available: currentQuota
       });
     }
 
-    // Construire le master prompt
-    const stylePrompt = STYLE_PROMPTS[style] || STYLE_PROMPTS.pixar;
+    // Build endpoint and input based on style
+    let endpoint, channel, input;
 
-    let fullPrompt;
-    if (generationMode === 'generate') {
-      // Text-to-image: génération pure depuis description
-      const userPrompt = customPrompt || 'a portrait of a person';
-      fullPrompt = `create ${userPrompt}, ${stylePrompt}`;
+    if (style === 'video') {
+      // Video generation
+      endpoint = '/wan/2-2-a14b-image-to-video-turbo';
+      channel = 'wan_request';
+      input = {
+        image_url: imageUrl,
+        prompt: customPrompt || 'smooth cinematic motion',
+        duration: 5,
+        aspect_ratio: '16:9',
+        resolution: '720p'
+      };
     } else {
-      // Image-to-image: transformation de la référence
-      const userDirective = customPrompt ? `, ${customPrompt}` : '';
-      // Le style prompt contient déjà "turn this character into..."
-      fullPrompt = `${stylePrompt}${userDirective}`;
+      // Image generation with nano-banana or nano-banana-pro
+      endpoint = mode === 'generate' ? '/fal-ai/nano-banana/text-to-image' : '/fal-ai/nano-banana/image-to-image';
+      channel = 'fal_request';
+
+      input = {
+        prompt: customPrompt || `Transform in ${style} style`,
+        image_size: 'square_hd'
+      };
+
+      if (mode === 'edit' && imageUrl) {
+        input.image_url = imageUrl;
+      }
+      if (imageUrls && imageUrls.length > 0) {
+        input.image_url = imageUrls[0]; // Use first image
+      }
     }
 
-    // Choisir le modèle selon le mode
-    let model;
-    if (usePro) {
-      model = 'nano-banana-pro'; // Mode PRO
-    } else {
-      model = generationMode === 'generate' ? 'google/nano-banana' : 'google/nano-banana-edit';
-    }
-
-    // Callback URL Vercel - utilise le host de la requête pour être dynamique
     const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
     const callbackUrl = `https://${host}/api/kie-callback`;
+    input.callBackUrl = callbackUrl;
 
-    // Préparer les URLs d'images pour le mode edit
-    const imageUrlsArray = imageUrls || (imageUrl ? [imageUrl] : null);
+    console.log('KIE.AI Request:', { endpoint, channel, input });
 
-    // DEBUG LOG
-    console.log('=== BACKEND GENERATE-IMAGE ===');
-    console.log('userId:', userId);
-    console.log('style:', style);
-    console.log('mode:', generationMode);
-    console.log('isPro:', usePro);
-    console.log('model:', model);
-    console.log('image_size:', imageSize);
-    console.log('imageUrlsArray:', imageUrlsArray);
-    console.log('customPrompt:', customPrompt);
-    console.log('FINAL PROMPT:', fullPrompt);
-    console.log('==============================');
-
-    // Appeler KIE.AI
+    // Call KIE.AI API
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.KIE_API_KEY}`
+        'x-api-key': process.env.KIE_AI_KEY
       },
-      body: JSON.stringify({
-        model: model,
-        callBackUrl: callbackUrl,
-        input: usePro ? {
-          prompt: fullPrompt,
-          aspect_ratio: imageSize, // Pro model uses aspect_ratio
-          resolution: '1K',
-          output_format: 'png'
-        } : (generationMode === 'edit' ? {
-          prompt: fullPrompt,
-          image_urls: imageUrlsArray,
-          output_format: 'png',
-          image_size: imageSize
-        } : {
-          prompt: fullPrompt,
-          output_format: 'png',
-          image_size: imageSize
-        })
-      })
+      body: JSON.stringify({ endpoint, channel, input })
     });
 
     const kieResult = await kieResponse.json();
 
-    if (kieResult.code !== 200) {
+    if (!kieResult.success || !kieResult.data?.taskId) {
+      console.error('KIE.AI error:', kieResult);
       return res.status(500).json({
-        error: 'KIE.AI API error',
-        details: kieResult.msg
+        success: false,
+        error: kieResult.error || 'KIE.AI request failed',
+        details: kieResult
       });
     }
 
     const taskId = kieResult.data.taskId;
 
-    // Décrémenter les crédits (sauf Premium qui a unlimited)
-    if (!isPremium) {
-      await userRef.update({
-        totalCredits: admin.firestore.FieldValue.increment(-1),
-        lifetimeTransformations: admin.firestore.FieldValue.increment(1),
-        transformationsCount: admin.firestore.FieldValue.increment(1)
-      });
-    } else {
-      await userRef.update({
-        lifetimeTransformations: admin.firestore.FieldValue.increment(1),
-        transformationsCount: admin.firestore.FieldValue.increment(1)
-      });
-    }
-
-    // Sauvegarder la transformation en pending
-    const transformationRef = db.collection('transformations').doc(taskId);
-    await transformationRef.set({
-      userId: userId,
-      taskId: taskId,
-      style: style,
-      prompt: fullPrompt,
-      originalImageUrl: imageUrl || null,
-      status: 'pending',
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      subscriptionTier: userData.subscriptionTier
+    // Deduct credits
+    await userRef.update({
+      quotaRemaining: admin.firestore.FieldValue.increment(-creditsCost)
     });
+
+    console.log(`✅ Legacy generation started - taskId: ${taskId}`);
 
     return res.status(200).json({
       success: true,
       taskId: taskId,
-      message: 'Transformation started! Results will be available soon.',
-      estimatedTime: '10-15 seconds'
+      message: `Generation started!`,
+      creditsUsed: creditsCost
     });
 
   } catch (error) {
-    console.error('Error generating image:', error);
+    console.error('❌ Legacy request error:', error);
     return res.status(500).json({
       success: false,
       error: error.message
     });
   }
+}
+
+/**
+ * Handle DYNAMIC request (modelId + parameters, new system)
+ */
+async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
+  try {
+    // Find model in catalog
+    const model = findModelById(modelId);
+    if (!model) {
+      console.error('Model not found:', modelId);
+      return res.status(404).json({ error: `Model not found: ${modelId}` });
+    }
+
+    console.log('Found model:', model.name);
+
+    // Get user and check credits
+    const db = getFirestore();
+    const userRef = db.collection('users').doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const userData = userDoc.data();
+    const currentQuota = userData.quotaRemaining || 0;
+    const creditsCost = getModelCreditsCost(model);
+
+    console.log('Current quota:', currentQuota);
+    console.log('Credits cost:', creditsCost);
+
+    if (currentQuota < creditsCost) {
+      return res.status(403).json({
+        error: 'Insufficient credits',
+        message: `This model requires ${creditsCost} credits. You have ${currentQuota} credits.`,
+        required: creditsCost,
+        available: currentQuota
+      });
+    }
+
+    // Build input
+    const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
+    const callbackUrl = `https://${host}/api/kie-callback`;
+    const input = buildInputFromParameters(model, parameters);
+
+    // Add callback URL if model supports it
+    if (model.parameters?.optional?.callBackUrl || model.parameters?.required?.callBackUrl) {
+      input.callBackUrl = callbackUrl;
+    }
+
+    console.log('Final input:', JSON.stringify(input, null, 2));
+
+    // Call KIE.AI API
+    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.KIE_AI_KEY
+      },
+      body: JSON.stringify({
+        endpoint: model.endpoint,
+        channel: model.channel || 'fal_request',
+        input: input
+      })
+    });
+
+    const kieResult = await kieResponse.json();
+
+    if (!kieResult.success || !kieResult.data?.taskId) {
+      console.error('KIE.AI error:', kieResult);
+      return res.status(500).json({
+        success: false,
+        error: kieResult.error || 'KIE.AI request failed',
+        details: kieResult
+      });
+    }
+
+    const taskId = kieResult.data.taskId;
+
+    // Deduct credits
+    await userRef.update({
+      quotaRemaining: admin.firestore.FieldValue.increment(-creditsCost)
+    });
+
+    console.log(`✅ Dynamic generation started - taskId: ${taskId}`);
+
+    return res.status(200).json({
+      success: true,
+      taskId: taskId,
+      message: `${model.name} generation started!`,
+      modelName: model.name,
+      modelType: model.type,
+      creditsUsed: creditsCost,
+      estimatedTime: model.type === 'video' ? '30-90 seconds' : '10-30 seconds'
+    });
+
+  } catch (error) {
+    console.error('❌ Dynamic request error:', error);
+    return res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+}
+
+module.exports = async (req, res) => {
+  console.log('🚀 GENERATE-IMAGE.JS - HYBRID ENDPOINT (Legacy + Dynamic)');
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const { userId, modelId, parameters, style, imageUrl, imageUrls, customPrompt, mode } = req.body;
+
+  console.log('=== REQUEST ===');
+  console.log('userId:', userId);
+  console.log('modelId:', modelId);
+  console.log('style:', style);
+  console.log('parameters:', parameters);
+  console.log('imageUrl:', imageUrl);
+  console.log('mode:', mode);
+
+  // Validate userId
+  if (!userId) return res.status(400).json({ error: 'Missing userId' });
+
+  // LEGACY MODE: If style is provided (old app format)
+  if (style && !modelId) {
+    console.log('📱 LEGACY MODE: Using style-based generation');
+    return handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrls, customPrompt, mode });
+  }
+
+  // DYNAMIC MODE: If modelId is provided (new dynamic system)
+  if (modelId) {
+    console.log('🚀 DYNAMIC MODE: Using modelId + parameters');
+    if (!parameters) return res.status(400).json({ error: 'Missing parameters for dynamic mode' });
+    return handleDynamicRequest(req, res, { userId, modelId, parameters });
+  }
+
+  // Neither style nor modelId provided
+  return res.status(400).json({ error: 'Missing either style (legacy) or modelId (dynamic)' });
 };
