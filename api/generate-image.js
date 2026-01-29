@@ -114,11 +114,11 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
       }
     }
 
-    const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
+    const host = req.headers.host || 'bananotoon-backend1.vercel.app';
     const callbackUrl = `https://${host}/api/kie-callback`;
     input.callBackUrl = callbackUrl;
 
-    console.log('KIE.AI Request:', { model: endpoint, callBackUrl, input });
+    console.log('KIE.AI Request:', { model: endpoint, callbackUrl, input });
 
     // Call KIE.AI API (CORRECT FORMAT)
     const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
@@ -210,14 +210,12 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
     }
 
     // Build input
-    const host = req.headers.host || 'bananotoon-backend1-five.vercel.app';
+    const host = req.headers.host || 'bananotoon-backend1.vercel.app';
     const callbackUrl = `https://${host}/api/kie-callback`;
     const input = buildInputFromParameters(model, parameters);
 
-    // Add callback URL if model supports it
-    if (model.parameters?.optional?.callBackUrl || model.parameters?.required?.callBackUrl) {
-      input.callBackUrl = callbackUrl;
-    }
+    // Always add callback URL
+    input.callBackUrl = callbackUrl;
 
     console.log('Final input:', JSON.stringify(input, null, 2));
 
