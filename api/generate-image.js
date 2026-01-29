@@ -17,12 +17,18 @@ function loadModelsCatalog() {
     categoryFiles.forEach(filename => {
       try {
         const filePath = path.join(__dirname, '..', filename);
+        console.log('Loading catalog:', filePath);
         const fileData = fs.readFileSync(filePath, 'utf8');
         const categoryData = JSON.parse(fileData);
+        console.log(`Loaded ${categoryData.models.length} models from ${filename}`);
         allModels.push(...categoryData.models);
-      } catch (err) { console.warn(`Failed to load ${filename}:`, err.message); }
+      } catch (err) {
+        console.error(`Failed to load ${filename}:`, err.message);
+        console.error('Full error:', err);
+      }
     });
     modelsCatalog = { version: '1.0.0', models: allModels };
+    console.log(`Total models loaded: ${allModels.length}`);
     return modelsCatalog;
   } catch (error) {
     console.error('Error loading models catalog:', error);
