@@ -121,7 +121,7 @@ async function handleLegacyRequest(req, res, { userId, style, imageUrl, imageUrl
     console.log('KIE.AI Request:', { endpoint, channel, input });
 
     // Call KIE.AI API
-    const kieResponse = await fetch('https://api.kie.ai/v1/jobs/createTask', {
+    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -218,7 +218,7 @@ async function handleDynamicRequest(req, res, { userId, modelId, parameters }) {
     console.log('Final input:', JSON.stringify(input, null, 2));
 
     // Call KIE.AI API
-    const kieResponse = await fetch('https://api.kie.ai/v1/jobs/createTask', {
+    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

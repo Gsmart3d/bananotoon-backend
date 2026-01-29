@@ -122,7 +122,7 @@ module.exports = async (req, res) => {
     console.log('Final input:', JSON.stringify(input, null, 2));
 
     // Call KIE.AI API
-    const kieResponse = await fetch('https://api.kie.ai/v1/jobs/createTask', {
+    const kieResponse = await fetch('https://api.kie.ai/api/v1/jobs/createTask', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
