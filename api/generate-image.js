@@ -4,35 +4,57 @@
  * Endpoint: /api/transform
  */
 const { getFirestore, admin } = require('./_firebase');
-const fs = require('fs');
-const path = require('path');
 
-// Load models catalog
+// Load models catalog using require() (works on Vercel serverless)
 let modelsCatalog = null;
 function loadModelsCatalog() {
   if (modelsCatalog) return modelsCatalog;
   try {
-    const categoryFiles = ['image-models.json', 'video-models.json', 'audio-models.json', 'chat-models.json', 'enhancement-models.json', 'avatar-models.json'];
     const allModels = [];
-    categoryFiles.forEach(filename => {
-      try {
-        const filePath = path.join(__dirname, '..', filename);
-        console.log('Loading catalog:', filePath);
-        const fileData = fs.readFileSync(filePath, 'utf8');
-        const categoryData = JSON.parse(fileData);
-        console.log(`Loaded ${categoryData.models.length} models from ${filename}`);
-        allModels.push(...categoryData.models);
-      } catch (err) {
-        console.error(`Failed to load ${filename}:`, err.message);
-        console.error('Full error:', err);
-      }
-    });
+
+    // Use require() instead of fs.readFileSync() for Vercel compatibility
+    try {
+      const imageModels = require('../image-models.json');
+      console.log(`Loaded ${imageModels.models.length} image models`);
+      allModels.push(...imageModels.models);
+    } catch (err) { console.error('Failed to load image-models.json:', err.message); }
+
+    try {
+      const videoModels = require('../video-models.json');
+      console.log(`Loaded ${videoModels.models.length} video models`);
+      allModels.push(...videoModels.models);
+    } catch (err) { console.error('Failed to load video-models.json:', err.message); }
+
+    try {
+      const audioModels = require('../audio-models.json');
+      console.log(`Loaded ${audioModels.models.length} audio models`);
+      allModels.push(...audioModels.models);
+    } catch (err) { console.error('Failed to load audio-models.json:', err.message); }
+
+    try {
+      const chatModels = require('../chat-models.json');
+      console.log(`Loaded ${chatModels.models.length} chat models`);
+      allModels.push(...chatModels.models);
+    } catch (err) { console.error('Failed to load chat-models.json:', err.message); }
+
+    try {
+      const enhancementModels = require('../enhancement-models.json');
+      console.log(`Loaded ${enhancementModels.models.length} enhancement models`);
+      allModels.push(...enhancementModels.models);
+    } catch (err) { console.error('Failed to load enhancement-models.json:', err.message); }
+
+    try {
+      const avatarModels = require('../avatar-models.json');
+      console.log(`Loaded ${avatarModels.models.length} avatar models`);
+      allModels.push(...avatarModels.models);
+    } catch (err) { console.error('Failed to load avatar-models.json:', err.message); }
+
     modelsCatalog = { version: '1.0.0', models: allModels };
-    console.log(`Total models loaded: ${allModels.length}`);
+    console.log(`✅ Total models loaded: ${allModels.length}`);
     return modelsCatalog;
   } catch (error) {
-    console.error('Error loading models catalog:', error);
-    return null;
+    console.error('❌ Error loading models catalog:', error);
+    return { version: '1.0.0', models: [] };
   }
 }
 
